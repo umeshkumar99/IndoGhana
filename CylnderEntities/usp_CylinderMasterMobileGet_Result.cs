@@ -13,6 +13,7 @@ namespace CylnderEntities
     
     public partial class usp_CylinderMasterMobileGet_Result
     {
+        public int CylinderID { get; set; }
         public string CylindeNumber { get; set; }
         public string Barcode { get; set; }
         public Nullable<int> PresentStateID { get; set; }

@@ -5,6 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="IndoGhanaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="usp_CustomerListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_CustomerMasterGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_CustomerMasterGetbyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerID" Type="int" Mode="In" />
@@ -23,9 +24,13 @@
           <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
           <Parameter Name="status" Type="bit" Mode="In" />
         </Function>
+        <Function Name="usp_CustomerSiteListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_CustomerSiteMasterGetbyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerID" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_CustomrSiteListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_CylinderMasterGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_CylinderMasterGetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CylindeNumber" Type="varchar" Mode="In" />
@@ -119,6 +124,11 @@
           <Parameter Name="BranchID" Type="int" Mode="In" />
           <Parameter Name="VehicleID" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_VendorBranchListDetailsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_VendorBranchListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VendorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_VendorListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="IndoGhanaModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -230,14 +240,24 @@
           <FunctionImport Name="usp_CylinderMasterGetByID" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGetByID_Result)">
           <Parameter Name="CylindeNumber" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="usp_CylinderMasterMobileGet" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterMobileGet_Result)" />
-          <FunctionImport Name="usp_CylinderMasterMobileGetByID" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterMobileGetByID_Result)">
-          <Parameter Name="CylindeNumber" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="USP_GetUserDetails" ReturnType="Collection(IndoGhanaModel.USP_GetUserDetails_Result)">
             <Parameter Name="LoginId" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CustomerListGet" ReturnType="Collection(IndoGhanaModel.usp_CustomerListGet_Result)" />
+          <FunctionImport Name="usp_CustomerSiteListGet" ReturnType="Collection(IndoGhanaModel.usp_CustomerSiteListGet_Result)">
+          <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_VendorBranchListGet" ReturnType="Collection(IndoGhanaModel.usp_VendorBranchListGet_Result)">
+          <Parameter Name="VendorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_VendorListGet" ReturnType="Collection(IndoGhanaModel.usp_VendorListGet_Result)" />
+          <FunctionImport Name="usp_CustomrSiteListGet" ReturnType="Collection(IndoGhanaModel.usp_CustomrSiteListGet_Result)" />
+          <FunctionImport Name="usp_VendorBranchListDetailsGet" ReturnType="Collection(IndoGhanaModel.usp_VendorBranchListDetailsGet_Result)" />
+          <FunctionImport Name="usp_CylinderMasterMobileGet" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterMobileGet_Result)" />
+          <FunctionImport Name="usp_CylinderMasterMobileGetByID" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterMobileGetByID_Result)">
+            <Parameter Name="CylindeNumber" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_tblStatusMasterGetByType_Result">
@@ -435,7 +455,53 @@
           <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="status" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="USP_GetUserDetails_Result">
+          <Property Type="Int32" Name="USer_Id" Nullable="false" />
+          <Property Type="String" Name="USer_Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IMIE1" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IMIE2" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Login_Id" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ApplicationID" Nullable="false" />
+          <Property Type="Int32" Name="Company_Id" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Branch_Id" Nullable="true" />
+          <Property Type="String" Name="BranchName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="VersionID" Nullable="false" />
+          <Property Type="String" Name="VersionNo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LoggedIn" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_CustomerListGet_Result">
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="usp_CustomerSiteListGet_Result">
+          <Property Type="Int32" Name="CustomerSiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="usp_VendorBranchListGet_Result">
+          <Property Type="Int32" Name="VendorBranchID" Nullable="false" />
+          <Property Type="String" Name="VendorBranchName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_VendorListGet_Result">
+          <Property Type="Int32" Name="VendorID" Nullable="false" />
+          <Property Type="String" Name="VendorName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_CustomrSiteListGet_Result">
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="CustomerSiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="usp_VendorBranchListDetailsGet_Result">
+          <Property Type="Int32" Name="VendorID" Nullable="false" />
+          <Property Type="String" Name="VendorName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="VendorBranchID" Nullable="false" />
+          <Property Type="String" Name="VendorBranchName" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <ComplexType Name="usp_CylinderMasterMobileGet_Result">
+          <Property Type="Int32" Name="CylinderID" Nullable="false" />
           <Property Type="String" Name="CylindeNumber" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Barcode" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="PresentStateID" Nullable="true" />
@@ -459,6 +525,7 @@
           <Property Type="Int32" Name="UpdatedByID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="usp_CylinderMasterMobileGetByID_Result">
+          <Property Type="Int32" Name="CylinderID" Nullable="false" />
           <Property Type="String" Name="CylindeNumber" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Barcode" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="PresentStateID" Nullable="true" />
@@ -480,23 +547,6 @@
           <Property Type="Int32" Name="CompanyID" Nullable="true" />
           <Property Type="Int32" Name="CreatedByID" Nullable="true" />
           <Property Type="Int32" Name="UpdatedByID" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="USP_GetUserDetails_Result">
-          <Property Type="Int32" Name="USer_Id" Nullable="false" />
-          <Property Type="String" Name="USer_Name" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IMIE1" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="IMIE2" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Login_Id" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="ApplicationID" Nullable="false" />
-          <Property Type="Int32" Name="Company_Id" Nullable="true" />
-          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Branch_Id" Nullable="true" />
-          <Property Type="String" Name="BranchName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="VersionID" Nullable="false" />
-          <Property Type="String" Name="VersionNo" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="LoggedIn" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -744,9 +794,83 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_GetUserDetails" FunctionName="IndoGhanaModel.Store.USP_GetUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.USP_GetUserDetails_Result">
+                <ScalarProperty Name="USer_Id" ColumnName="USer_Id" />
+                <ScalarProperty Name="USer_Name" ColumnName="USer_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="IMIE1" ColumnName="IMIE1" />
+                <ScalarProperty Name="IMIE2" ColumnName="IMIE2" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Branch_Id" ColumnName="Branch_Id" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="LoggedIn" ColumnName="LoggedIn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CustomerListGet" FunctionName="IndoGhanaModel.Store.usp_CustomerListGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_CustomerListGet_Result">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CustomerSiteListGet" FunctionName="IndoGhanaModel.Store.usp_CustomerSiteListGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_CustomerSiteListGet_Result">
+                <ScalarProperty Name="CustomerSiteID" ColumnName="CustomerSiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_VendorBranchListGet" FunctionName="IndoGhanaModel.Store.usp_VendorBranchListGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorBranchListGet_Result">
+                <ScalarProperty Name="VendorBranchID" ColumnName="VendorBranchID" />
+                <ScalarProperty Name="VendorBranchName" ColumnName="VendorBranchName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_VendorListGet" FunctionName="IndoGhanaModel.Store.usp_VendorListGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorListGet_Result">
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CustomrSiteListGet" FunctionName="IndoGhanaModel.Store.usp_CustomrSiteListGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_CustomrSiteListGet_Result">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerSiteID" ColumnName="CustomerSiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_VendorBranchListDetailsGet" FunctionName="IndoGhanaModel.Store.usp_VendorBranchListDetailsGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorBranchListDetailsGet_Result">
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorBranchID" ColumnName="VendorBranchID" />
+                <ScalarProperty Name="VendorBranchName" ColumnName="VendorBranchName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_CylinderMasterMobileGet" FunctionName="IndoGhanaModel.Store.usp_CylinderMasterMobileGet">
             <ResultMapping>
               <ComplexTypeMapping TypeName="IndoGhanaModel.usp_CylinderMasterMobileGet_Result">
+                <ScalarProperty Name="CylinderID" ColumnName="CylinderID" />
                 <ScalarProperty Name="CylindeNumber" ColumnName="CylindeNumber" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="PresentStateID" ColumnName="PresentStateID" />
@@ -774,6 +898,7 @@
           <FunctionImportMapping FunctionImportName="usp_CylinderMasterMobileGetByID" FunctionName="IndoGhanaModel.Store.usp_CylinderMasterMobileGetByID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="IndoGhanaModel.usp_CylinderMasterMobileGetByID_Result">
+                <ScalarProperty Name="CylinderID" ColumnName="CylinderID" />
                 <ScalarProperty Name="CylindeNumber" ColumnName="CylindeNumber" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="PresentStateID" ColumnName="PresentStateID" />
@@ -795,27 +920,6 @@
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
                 <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_GetUserDetails" FunctionName="IndoGhanaModel.Store.USP_GetUserDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IndoGhanaModel.USP_GetUserDetails_Result">
-                <ScalarProperty Name="USer_Id" ColumnName="USer_Id" />
-                <ScalarProperty Name="USer_Name" ColumnName="USer_Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
-                <ScalarProperty Name="IMIE1" ColumnName="IMIE1" />
-                <ScalarProperty Name="IMIE2" ColumnName="IMIE2" />
-                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
-                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
-                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Branch_Id" ColumnName="Branch_Id" />
-                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
-                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
-                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
-                <ScalarProperty Name="LoggedIn" ColumnName="LoggedIn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

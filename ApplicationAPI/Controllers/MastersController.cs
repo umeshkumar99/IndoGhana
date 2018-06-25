@@ -63,5 +63,62 @@ namespace ApplicationAPI.Controllers
                 , cylinderDetails.CurrentCustomerBranchID, cylinderDetails.Branchid, cylinderDetails.CompanyID, cylinderDetails.CreatedByID, cylinderDetails.UpdatedByID, cylinderDetails.status).FirstOrDefault();
             return result;
         }
+        
+
+        [HttpGet]
+        public List<usp_CustomerListGet_Result> GetCustomerMobileList()
+        {
+            List<usp_CustomerListGet_Result> customerlist = new List<usp_CustomerListGet_Result>();
+            customerlist = InventoryEntities.usp_CustomerListGet().ToList();
+            return customerlist;
+        }
+
+
+        [HttpGet]
+        public List<usp_CustomerSiteListGet_Result> GetCustomerMobileSiteList(int customerID)
+        {
+            List<usp_CustomerSiteListGet_Result> customerSitelist = new List<usp_CustomerSiteListGet_Result>();
+            customerSitelist = InventoryEntities.usp_CustomerSiteListGet(customerID).ToList();
+            return customerSitelist;
+        }
+
+
+
+        [HttpGet]
+        public List<usp_VendorListGet_Result> GetVendorMobileList()
+        {
+            List<usp_VendorListGet_Result> Vendorlist = new List<usp_VendorListGet_Result>();
+            Vendorlist = InventoryEntities.usp_VendorListGet().ToList();
+            return Vendorlist;
+        }
+
+
+        [HttpGet]
+        public List<usp_VendorBranchListGet_Result> GetVendorBranchMobileList(int VendorID)
+        {
+            List<usp_VendorBranchListGet_Result> VendorBranchlist = new List<usp_VendorBranchListGet_Result>();
+            VendorBranchlist = InventoryEntities.usp_VendorBranchListGet(VendorID).ToList();
+            return VendorBranchlist;
+        }
+
+
+        [HttpGet]
+        public List<usp_VendorBranchListDetailsGet_Result> GetVendorBranchMobileList()
+        {
+            List<usp_VendorBranchListDetailsGet_Result> Vendorlist = new List<usp_VendorBranchListDetailsGet_Result>();
+            Vendorlist = InventoryEntities.usp_VendorBranchListDetailsGet().ToList();
+            return Vendorlist;
+        }
+
+
+        [HttpGet]
+        public List<usp_CustomrSiteListGet_Result> GetCustomerSiteMobileList()
+        {
+            List<usp_CustomrSiteListGet_Result> Customerlist = new List<usp_CustomrSiteListGet_Result>();
+            Customerlist = InventoryEntities.usp_CustomrSiteListGet().ToList();
+            return Customerlist;
+        }
+
+
     }
 }

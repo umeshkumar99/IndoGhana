@@ -415,20 +415,6 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetByID_Result>("usp_CylinderMasterGetByID", cylindeNumberParameter);
         }
     
-        public virtual ObjectResult<usp_CylinderMasterMobileGet_Result> usp_CylinderMasterMobileGet()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterMobileGet_Result>("usp_CylinderMasterMobileGet");
-        }
-    
-        public virtual ObjectResult<usp_CylinderMasterMobileGetByID_Result> usp_CylinderMasterMobileGetByID(string cylindeNumber)
-        {
-            var cylindeNumberParameter = cylindeNumber != null ?
-                new ObjectParameter("CylindeNumber", cylindeNumber) :
-                new ObjectParameter("CylindeNumber", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterMobileGetByID_Result>("usp_CylinderMasterMobileGetByID", cylindeNumberParameter);
-        }
-    
         public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
         {
             var loginIdParameter = loginId != null ?
@@ -444,6 +430,58 @@ namespace CylnderEntities
                 new ObjectParameter("Phone", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
+        }
+    
+        public virtual ObjectResult<usp_CustomerListGet_Result> usp_CustomerListGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerListGet_Result>("usp_CustomerListGet");
+        }
+    
+        public virtual ObjectResult<usp_CustomerSiteListGet_Result> usp_CustomerSiteListGet(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerSiteListGet_Result>("usp_CustomerSiteListGet", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_VendorBranchListGet_Result> usp_VendorBranchListGet(Nullable<int> vendorID)
+        {
+            var vendorIDParameter = vendorID.HasValue ?
+                new ObjectParameter("VendorID", vendorID) :
+                new ObjectParameter("VendorID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchListGet_Result>("usp_VendorBranchListGet", vendorIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_VendorListGet_Result> usp_VendorListGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorListGet_Result>("usp_VendorListGet");
+        }
+    
+        public virtual ObjectResult<usp_CustomrSiteListGet_Result> usp_CustomrSiteListGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomrSiteListGet_Result>("usp_CustomrSiteListGet");
+        }
+    
+        public virtual ObjectResult<usp_VendorBranchListDetailsGet_Result> usp_VendorBranchListDetailsGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchListDetailsGet_Result>("usp_VendorBranchListDetailsGet");
+        }
+    
+        public virtual ObjectResult<usp_CylinderMasterMobileGet_Result> usp_CylinderMasterMobileGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterMobileGet_Result>("usp_CylinderMasterMobileGet");
+        }
+    
+        public virtual ObjectResult<usp_CylinderMasterMobileGetByID_Result> usp_CylinderMasterMobileGetByID(string cylindeNumber)
+        {
+            var cylindeNumberParameter = cylindeNumber != null ?
+                new ObjectParameter("CylindeNumber", cylindeNumber) :
+                new ObjectParameter("CylindeNumber", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterMobileGetByID_Result>("usp_CylinderMasterMobileGetByID", cylindeNumberParameter);
         }
     }
 }

@@ -121,13 +121,22 @@
       <DependentUpon>Inventory.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="usp_CustomerListGet_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_CustomerMasterGetbyID_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_CustomerMasterGet_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_CustomerSiteListGet_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_CustomerSiteMasterGetbyID_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_CustomrSiteListGet_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_CylinderMasterGetByID_Result.cs">
@@ -158,6 +167,15 @@
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_VehicleMasterGet_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_VendorBranchListDetailsGet_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_VendorBranchListGet_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_VendorListGet_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
   </ItemGroup>
