@@ -1,16 +1,9 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script type="text/javascript">
     function DeleteRows() {
         var rowCount = Prodtbl.rows.length;
@@ -25,6 +18,7 @@
         $(document).ready(function () {
             //alert('body');
             $('#txtbarcode').focus();
+            var count=1;
             //function DeleteRows() {
             //    var rowCount = Prodtbl.rows.length;
             //    for (var i = rowCount - 1; i > 0; i--) {
@@ -51,7 +45,8 @@
                        
                        if (data != null) {
                            debugger;
-                           Prodtbl.append('<tr><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
+                           Prodtbl.append('<tr id="tr'+count.toString()+'"><td>' + '<input  checked type="checkbox" id="chk' + count.toString() + '"/></td><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
+                           count = count + 1;
                            //$('.ddCont').html($('.ddCont').html()
                            //    + '<br/><input  checked type="checkbox" />'
                            //    + '<label for="' + data.VendorName + '" class="txt">' + data.VendorName + '</label>'
@@ -60,6 +55,8 @@
                            //    + '<input type="text" readonly value=' + data.Size + data.SizeUOM + ' class="txt">'
                            //    + '<input type="text" readonly value=' + data.PresentState + ' class="txt">'
                            //    );
+                           $('#selectBarcode').append('<option value="' + txtbarcodeval +'" >'+ txtbarcodeval+'</option>');
+                           
                            $('#txtbarcode').focus();
                        }
                        else {
@@ -88,16 +85,20 @@
         });
     </script>
 
-    <title>Index</title>
-</head>
-<body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
+        <div class="row" style="margin-top:100px;">
+            <div class="col-md-12 col-md-offset-1 col-lg-12 col-lg-offset-1 col-xs-12">
                 <div class="form-group">
                     <div class="col-lg-2 col-md-2 col-xs-12">Cylinder Barcode</div>
-                    <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="col-lg-2 col-md-2 col-xs-12">
                         <input type="text" id="txtbarcode" name="txtbarcode" class="text-primary" />
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-xs-12">
+                        <select id="selectBarcode">
+                            <option></option>
+
+                        </select>
+
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12">
                         <input type="button" value="Clear all data" class="btn btn-primary" onclick="DeleteRows();" />
@@ -132,6 +133,7 @@
                                     <table id="Prodtbl" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
+                                                <th></th>
                                                 <th>Cylinder No.</th>
                                                 <th>Vendor Name</th>
                                                 <th>Gas-In Use</th>
@@ -149,6 +151,3 @@
         }
     </div>
 
-        </body>
-
-</html>
