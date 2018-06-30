@@ -21,14 +21,17 @@ namespace CylnderEntities
         public Nullable<int> GasInUseID { get; set; }
         public string GasInUse { get; set; }
         public Nullable<int> CurrentLocationID { get; set; }
+        public string CurrentLocation { get; set; }
         public Nullable<int> VendorID { get; set; }
-        public Nullable<int> VendorBranchID { get; set; }
         public string VendorName { get; set; }
+        public Nullable<int> VendorBranchID { get; set; }
+        public string VendorBranchName { get; set; }
         public Nullable<int> Size { get; set; }
         public Nullable<int> SizeUOMID { get; set; }
         public string SizeUOM { get; set; }
         public Nullable<int> CustomerID { get; set; }
         public Nullable<int> CurrentCustomerBranchID { get; set; }
+        public string CustomerSiteName { get; set; }
         public string CustomerName { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<int> Branchid { get; set; }

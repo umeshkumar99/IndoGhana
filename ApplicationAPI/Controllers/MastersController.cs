@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
+using System.Threading.Tasks;
 using CylnderEntities;
+using System.IO;
+using System.Text;
+using Microsoft.VisualBasic;
 
 namespace ApplicationAPI.Controllers
 {
@@ -16,6 +21,7 @@ namespace ApplicationAPI.Controllers
         [HttpGet]
         public List<usp_CylinderMasterGet_Result> GetCylinderMasterList()
         {
+            
             List<usp_CylinderMasterGet_Result> cylinderlist = new List<usp_CylinderMasterGet_Result>();
             cylinderlist = InventoryEntities.usp_CylinderMasterGet().ToList();
             return cylinderlist;
@@ -45,22 +51,28 @@ namespace ApplicationAPI.Controllers
         }
 
         [HttpPost]
-        public string CylinderMasterInsertUpdate(usp_CylinderMasterGetByID_Result cylinderDetails)
+        public string CylinderMasterInsertUpdate(usp_CylinderMasterGetByID_Result cylinderModel)
         {
 
             string result;
-            result=InventoryEntities.usp_CylinderMasterInsertUpdateMobile(cylinderDetails.CylindeNumber, cylinderDetails.Barcode, cylinderDetails.PresentStateID, cylinderDetails.GasInUseID, cylinderDetails.VendorBranchID, cylinderDetails.Size, cylinderDetails.SizeUOMID, cylinderDetails.CurrentLocationID
-                , cylinderDetails.CurrentCustomerBranchID, cylinderDetails.Branchid, cylinderDetails.CompanyID, cylinderDetails.CreatedByID,cylinderDetails.UpdatedByID,cylinderDetails.status).FirstOrDefault();
+            String[] lines = { "First line", "Second line", "Third line" };
+            File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
+
+            result =InventoryEntities.usp_CylinderMasterInsertUpdateMobile(cylinderModel.CylindeNumber, cylinderModel.Barcode, cylinderModel.PresentStateID, cylinderModel.GasInUseID, cylinderModel.VendorBranchID, cylinderModel.Size, cylinderModel.SizeUOMID, cylinderModel.CurrentLocationID
+                , cylinderModel.CurrentCustomerBranchID, cylinderModel.Branchid, cylinderModel.CompanyID, cylinderModel.CreatedByID,cylinderModel.UpdatedByID,cylinderModel.status).FirstOrDefault();
             return result;
         }
 
         [HttpPost]
-        public string CylinderMasterInsertUpdate(usp_CylinderMasterMobileGetByID_Result cylinderDetails)
+        public string CylinderMasterInsertMobileUpdate(usp_CylinderMasterMobileGetByID_Result cylinderModel)
         {
 
             string result;
-            result = InventoryEntities.usp_CylinderMasterInsertUpdateMobile(cylinderDetails.CylindeNumber, cylinderDetails.Barcode, cylinderDetails.PresentStateID, cylinderDetails.GasInUseID, cylinderDetails.VendorBranchID, cylinderDetails.Size, cylinderDetails.SizeUOMID, cylinderDetails.CurrentLocationID
-                , cylinderDetails.CurrentCustomerBranchID, cylinderDetails.Branchid, cylinderDetails.CompanyID, cylinderDetails.CreatedByID, cylinderDetails.UpdatedByID, cylinderDetails.status).FirstOrDefault();
+            //String[] lines = { "First line", "Second line", "Third line" };
+            //File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
+                
+            result = InventoryEntities.usp_CylinderMasterInsertUpdateMobile(cylinderModel.CylindeNumber, cylinderModel.Barcode, cylinderModel.PresentStateID, cylinderModel.GasInUseID, cylinderModel.VendorBranchID, cylinderModel.Size, cylinderModel.SizeUOMID, cylinderModel.CurrentLocationID
+                , cylinderModel.CurrentCustomerBranchID, cylinderModel.Branchid, cylinderModel.CompanyID, cylinderModel.CreatedByID, cylinderModel.UpdatedByID, cylinderModel.status).FirstOrDefault();
             return result;
         }
         
@@ -119,6 +131,82 @@ namespace ApplicationAPI.Controllers
             return Customerlist;
         }
 
+        public async Task<string> PostFile()
+        {
+            // Check if the request contains multipart/form-data.
+            //string result;
+            //String[] lines = { "First line from file ", "Second line from file", "Third line from file" };
+            //File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
+
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            string root = HttpContext.Current.Server.MapPath("~/Content");
+            var provider = new MultipartFormDataStreamProvider(root);
+
+            try
+            {
+                StringBuilder sb = new StringBuilder(); // Holds the response body
+
+                // Read the form data and return an async task.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the form data.
+                string filename=""; int count = 0;
+                foreach (var key in provider.FormData.AllKeys)
+                {
+                    foreach (var val in provider.FormData.GetValues(key))
+                    {
+                        sb.Append(string.Format("{0}: {1}\n", key, val));
+                        if (count == 0)
+                        {
+                            filename = val;
+                        }
+                    }
+                }
+
+                // This illustrates how to get the file names for uploaded files.
+                
+                    
+                    foreach (var file in provider.FileData)
+                {
+                    FileInfo fileInfo = new FileInfo(file.LocalFileName);
+                    FileSystem.Rename(fileInfo.FullName, root +"\\" + filename);    
+                    //sb.Append(string.Format("Uploaded file: {0} ({1} bytes)\n", fileInfo.Name, fileInfo.Length));
+                }
+
+                //if (!String.IsNullOrEmpty(sb.ToString()))
+                //{
+                //    //File.AppendAllText(@"D:\IndoGhana\API\log.txt", sb.ToString());
+                    String[] lines = { "sucess sb string" };
+                    File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
+
+                //}
+                //else
+                //{
+                //    String[] lines = { "empty sb string", "Second line from file", "Third line from file" };
+                //    File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
+                //    //   File.AppendAllText(@"D:\IndoGhana\API\log.txt", "No key found");
+                //}
+                ////return new HttpResponseMessage()
+                //{
+                //    Content = new StringContent(sb.ToString())
+                //};
+
+                //    return "Successfully uploaded";
+                return sb.ToString();
+            }
+            catch (System.Exception e)
+            {
+                //return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                //File.AppendAllText(@"D:\IndoGhana\API\log.txt", e.InnerException.ToString());
+                //String[] lines = { "errror", "Second line from file", "Third line from file" };
+                //File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
+                return e.InnerException.ToString();
+            }
+        }
 
     }
 }

@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -162,11 +166,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\clsComman.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\CylinderDetails\Controllers\CylinderDetailsController.cs" />
+    <Compile Include="Areas\CylinderDetails\CylinderDetailsAreaRegistration.cs" />
+    <Compile Include="Areas\CylinderTransaction\Controllers\CylinderFillController.cs" />
+    <Compile Include="Areas\CylinderTransaction\CylinderTransactionAreaRegistration.cs" />
+    <Compile Include="Areas\LoginAdmin\LoginAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -180,6 +191,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -188,6 +200,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\CylinderDetails\Views\web.config" />
+    <Content Include="Areas\CylinderDetails\Views\CylinderDetails\Index.cshtml" />
+    <Content Include="Areas\CylinderTransaction\Views\web.config" />
+    <Content Include="Areas\Masters\Views\web.config" />
+    <Content Include="Areas\LoginAdmin\Views\web.config" />
+    <Content Include="Areas\CylinderDetails\Views\CylinderDetails\Edit.cshtml" />
+    <Content Include="Areas\CylinderTransaction\Views\CylinderFill\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -237,6 +256,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CylinderDetails\Models\" />
+    <Folder Include="Areas\CylinderDetails\Views\Shared\" />
+    <Folder Include="Areas\CylinderTransaction\Models\" />
+    <Folder Include="Areas\CylinderTransaction\Views\Shared\" />
+    <Folder Include="Areas\LoginAdmin\Controllers\" />
+    <Folder Include="Areas\LoginAdmin\Models\" />
+    <Folder Include="Areas\LoginAdmin\Views\Shared\" />
+    <Folder Include="Areas\Masters\Controllers\" />
+    <Folder Include="Areas\Masters\Models\" />
+    <Folder Include="Areas\Masters\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -245,6 +274,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CylnderEntities\CylnderEntities.csproj">
+      <Project>{d9568f99-b466-4e30-98ed-7c6dcd093dcc}</Project>
+      <Name>CylnderEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

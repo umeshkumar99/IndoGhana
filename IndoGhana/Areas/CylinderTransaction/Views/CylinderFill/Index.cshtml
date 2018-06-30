@@ -1,0 +1,154 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript">
+    function DeleteRows() {
+        var rowCount = Prodtbl.rows.length;
+        for (var i = rowCount - 1; i > 0; i--) {
+            Prodtbl.deleteRow(i);
+        }
+        $('#txtbarcode').focus();
+    }
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            //alert('body');
+            $('#txtbarcode').focus();
+            //function DeleteRows() {
+            //    var rowCount = Prodtbl.rows.length;
+            //    for (var i = rowCount - 1; i > 0; i--) {
+            //        Prodtbl.deleteRow(i);
+            //    }
+            //}
+            $('#txtbarcode').change(function () {
+                txtbarcodeval = document.getElementById('txtbarcode').value;
+                document.getElementById('txtbarcode').value = "";
+
+                debugger;
+                $.ajax(
+               {
+
+                   url: '@Url.Action("checkCyliderDetailsbyBarCode")',
+                   data: { barcode: txtbarcodeval },
+                   method: 'Post',
+                   dataType: 'json',
+
+                   success: function (data) {
+
+                       debugger;
+                       var Prodtbl = $('#Prodtbl tbody');
+                       
+                       if (data != null) {
+                           debugger;
+                           Prodtbl.append('<tr><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
+                           //$('.ddCont').html($('.ddCont').html()
+                           //    + '<br/><input  checked type="checkbox" />'
+                           //    + '<label for="' + data.VendorName + '" class="txt">' + data.VendorName + '</label>'
+                           //    + '<input type="text" readonly value=' + data.GasInUse + ' class="txt">'
+                               
+                           //    + '<input type="text" readonly value=' + data.Size + data.SizeUOM + ' class="txt">'
+                           //    + '<input type="text" readonly value=' + data.PresentState + ' class="txt">'
+                           //    );
+                           $('#txtbarcode').focus();
+                       }
+                       else {
+                           alert("Invalid Barcode.");
+                           document.getElementById('txtbarcode').focus();
+                       }
+                   },
+                   error: function (err) {
+                       debugger;
+                       alert(err.responseText);
+                   }
+               });
+
+
+
+
+
+            });
+
+            
+
+           
+
+
+           
+        });
+    </script>
+
+    <title>Index</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
+                <div class="form-group">
+                    <div class="col-lg-2 col-md-2 col-xs-12">Cylinder Barcode</div>
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <input type="text" id="txtbarcode" name="txtbarcode" class="text-primary" />
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12">
+                        <input type="button" value="Clear all data" class="btn btn-primary" onclick="DeleteRows();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+       @using (Html.BeginForm())
+
+       {
+         <div class="ROW">
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
+                    <input type="submit" value="Submit all data" class="btn btn-primary" onclick="DeleteRows();" />
+                </div>
+            </div>
+        </div>
+
+       
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
+
+                    <h3>Details of Cylinder scanned</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                            <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
+
+                                <div class="table-responsive">
+                                    <table id="Prodtbl" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Cylinder No.</th>
+                                                <th>Vendor Name</th>
+                                                <th>Gas-In Use</th>
+                                                <th>Size</th>
+                                                <th>Present Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+        }
+    </div>
+
+        </body>
+
+</html>

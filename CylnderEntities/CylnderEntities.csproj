@@ -139,6 +139,9 @@
     <Compile Include="usp_CustomrSiteListGet_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_CylinderMasterGetbyBarCode_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_CylinderMasterGetByID_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
