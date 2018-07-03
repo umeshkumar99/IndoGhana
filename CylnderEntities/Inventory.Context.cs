@@ -401,20 +401,6 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VehicleMasterGetByID_Result>("usp_VehicleMasterGetByID", companyIDParameter, branchIDParameter, vehicleIDParameter);
         }
     
-        public virtual ObjectResult<usp_CylinderMasterGet_Result> usp_CylinderMasterGet()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGet_Result>("usp_CylinderMasterGet");
-        }
-    
-        public virtual ObjectResult<usp_CylinderMasterGetByID_Result> usp_CylinderMasterGetByID(string cylindeNumber)
-        {
-            var cylindeNumberParameter = cylindeNumber != null ?
-                new ObjectParameter("CylindeNumber", cylindeNumber) :
-                new ObjectParameter("CylindeNumber", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetByID_Result>("usp_CylinderMasterGetByID", cylindeNumberParameter);
-        }
-    
         public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
         {
             var loginIdParameter = loginId != null ?
@@ -484,6 +470,11 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterMobileGetByID_Result>("usp_CylinderMasterMobileGetByID", cylindeNumberParameter);
         }
     
+        public virtual ObjectResult<usp_CylinderMasterGet_Result> usp_CylinderMasterGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGet_Result>("usp_CylinderMasterGet");
+        }
+    
         public virtual ObjectResult<usp_CylinderMasterGetbyBarCode_Result> usp_CylinderMasterGetbyBarCode(string barcode)
         {
             var barcodeParameter = barcode != null ?
@@ -491,6 +482,15 @@ namespace CylnderEntities
                 new ObjectParameter("Barcode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetbyBarCode_Result>("usp_CylinderMasterGetbyBarCode", barcodeParameter);
+        }
+    
+        public virtual ObjectResult<usp_CylinderMasterGetByID_Result> usp_CylinderMasterGetByID(string cylindeNumber)
+        {
+            var cylindeNumberParameter = cylindeNumber != null ?
+                new ObjectParameter("CylindeNumber", cylindeNumber) :
+                new ObjectParameter("CylindeNumber", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetByID_Result>("usp_CylinderMasterGetByID", cylindeNumberParameter);
         }
     }
 }

@@ -19,6 +19,10 @@ namespace IndoGhana.Areas.CylinderTransaction.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection frm)
         {
+            if(frm["barcodevalues"].ToString()!="")
+            {
+
+            }
             return View();
         }
         public ActionResult checkCyliderDetailsbyBarCode(string barcode)

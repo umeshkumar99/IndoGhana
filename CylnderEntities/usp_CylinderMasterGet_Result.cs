@@ -38,11 +38,14 @@ namespace CylnderEntities
         public Nullable<int> VendorID { get; set; }
         public Nullable<int> VendorBranchID { get; set; }
         public string VendorName { get; set; }
+        public string VendorBranchName { get; set; }
         public Nullable<int> Size { get; set; }
+        public Nullable<int> ActualSize { get; set; }
         public Nullable<int> SizeUOMID { get; set; }
         public string SizeUOM { get; set; }
         public Nullable<int> CustomerID { get; set; }
         public Nullable<int> CurrentCustomerBranchID { get; set; }
+        public string CustomerSiteName { get; set; }
         public string CustomerName { get; set; }
         public Nullable<System.DateTime> CurrentDeliveryDate { get; set; }
         public Nullable<System.DateTime> CurrentRecieveDate { get; set; }

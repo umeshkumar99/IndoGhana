@@ -1,239 +1,117 @@
-﻿@model IEnumerable<CylnderEntities.usp_CylinderMasterGet_Result>
-
+﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
 
-<!DOCTYPE html>
+        $.ajax(
+             {
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover" >
-            <tr>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CylinderID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CylindeNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Barcode)
-                </th>
+                 url: '@Url.Action("GetCylinderList")',
+                 
+                 method: 'Get',
+                 dataType: 'json',
 
-                <th>
-                    @Html.DisplayNameFor(model => model.ManufacturerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PurchaseDate)
-                </th>
+                 success: function (data) {
+                     debugger;
+                     var datatableinstance = $('#Prodtbl').DataTable({
 
-                <th>
-                    @Html.DisplayNameFor(model => model.InitialGas)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WLCapacity)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.WLCapacityUOM)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkingPressure)
-                </th>
+                         data: data,
+                         'paging': true,
+                         'sort': true,
+                         'searching': true,
+                         'scrolly': 200,
+                         columns:
+                         [
 
-                @*<th>
-                        @Html.DisplayNameFor(model => model.WorkingPressureUOM)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.TestDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NextTestDate)
-                </th>
+                         { 'data': 'CylinderID' },
+                             { 'data': 'CylindeNumber' },
+                              { 'data': 'Barcode' },
+                             { 'data': 'ManufacturerName' },
+                             { 'data': 'PurchaseDate' },
+                             { 'data': 'InitialGas' },
+                             { 'data': 'WLCapacity' },
+                             { 'data': 'WorkingPressure' },
+                             { 'data': 'TestDate' },
+                             { 'data': 'NextTestDate' },
+                             { 'data': 'ValveModel' },
+                             { 'data': 'VendorName'},
+                             { 'data': 'GasInUse'},
+                             { 'data': 'Size'},
+                             { 'data': 'ActualSize'},
+                             { 'data': 'CustomerName'},
+                             { 'data': 'CurrentDeliveryDate'},
+                             { 'data': 'CurrentRecieveDate'},
+                             { 'data': 'CurrentLocation'},
+                             { 'data': 'PresentState'},
+                             { 'data': 'status'}
+                         ]
+                     });
+                     
+                 },
+                 error: function (err) {
+                     debugger;
+                     alert(err.responseText);
+                 }
+             }
 
-                <th>
-                    @Html.DisplayNameFor(model => model.ValveModel)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.PresentState)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.GasInUse)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VendorName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Size)
-                </th>
-
-                @*<th>
-                        @Html.DisplayNameFor(model => model.SizeUOM)
-                    </th>*@
-                
-
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CurrentDeliveryDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CurrentRecieveDate)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.CurrentLocation)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.BranchName)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.CreationDate)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdatedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdatedOn)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.status)
-                </th>
-                
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { cylindernumber = item.CylindeNumber  }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CylinderID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CylindeNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Barcode)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ManufacturerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PurchaseDate)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InitialGas)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WLCapacity)
-                        @Html.DisplayFor(modelItem => item.WLCapacityUOM)
-                    </td>
-
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.WLCapacityUOM)
-                        </td>*@
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkingPressure)
-                        @Html.DisplayFor(modelItem => item.WorkingPressureUOM)
-                    </td>
-
-                    @*<td>
-
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TestDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NextTestDate)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValveModel)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PresentState)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GasInUse)
-                    </td>
+    )
 
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VendorName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Size)
-                        @Html.DisplayFor(modelItem => item.SizeUOM)
-                    </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CurrentDeliveryDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CurrentRecieveDate)
-                    </td>
+    });
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CurrentLocation)
-                    </td>
+</script>
+<h2>Index</h2>
+@using (Html.BeginForm())
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BranchName)
-                    </td>
+{
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreationDate)
-                    </td>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedBy)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UpdatedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UpdatedOn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.status)
-                    </td>
-                    
-                </tr>
-            }
-
-        </table>
+            <h3>Details of Cylinders</h3>
+        </div>
     </div>
-</body>
-</html>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
+                    <div class="table-responsive mycls">
+                        <table id="Prodtbl" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>CylinderID</th>
+                                    
+                                    <th>Cylinder No.</th>
+                                    <th>Barcode</th>
+                                    <th>ManufacturerName</th>
+                                    <th>PurchaseDate</th>
+                                    <th>InitialGas</th>
+                                    <th>WLCapacity</th>
+                                    <th>WorkingPressure</th>
+                                    <th>TestDate</th>
+                                    <th>NextTestDate</th>
+                                    <th>ValveModel</th>
+                                    <th>Owner Name</th>
+                                    <th>Gas-In Use</th>
+                                    <th>Size</th>
+                                    <th>ActualSize</th>
+                                    <th>CustomerName</th>
+                                    <th>CurrentDeliveryDate</th>
+                                    <th>CurrentRecieveDate</th>
+                                    <th>CurrentLocation</th>
+                                    <th>Present State</th>
+                                    <th>Present Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+}

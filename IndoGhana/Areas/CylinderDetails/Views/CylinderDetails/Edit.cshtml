@@ -1,20 +1,10 @@
 ﻿@model CylnderEntities.usp_CylinderMasterGetByID_Result
 
 @{
-    Layout = null;
+    ViewBag.Title = "Cylinder Fill";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit Cylider Details</title>
-</head>
-<body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
     
     
     @using (Html.BeginForm())
@@ -294,5 +284,3 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>

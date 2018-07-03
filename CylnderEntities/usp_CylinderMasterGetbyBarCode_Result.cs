@@ -39,6 +39,7 @@ namespace CylnderEntities
         public Nullable<int> VendorBranchID { get; set; }
         public string VendorName { get; set; }
         public Nullable<int> Size { get; set; }
+        public Nullable<int> ActualSize { get; set; }
         public Nullable<int> SizeUOMID { get; set; }
         public string SizeUOM { get; set; }
         public Nullable<int> CustomerID { get; set; }

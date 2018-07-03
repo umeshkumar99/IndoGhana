@@ -27,10 +27,12 @@
             <div id="navbar-menubuilder" class="navbar-collapse collapse">
 
                 <ul class="nav navbar-nav">
-                
-                        <li>@Html.ActionLink("Cylinder ReFill", "Index", "CylinderFill")</li>
-                    @*<li>@Html.ActionLink("PageMaster", "Index", "PageMaster")</li>
-                    <li>@Html.ActionLink("PageImages", "Index", "PageImages")</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li>@Html.ActionLink( "Cylinder Master","Index", "CylinderDetails", new { area="CylinderDetails" },new { } )</li>    
+                    <li>@Html.ActionLink("Cylinder ReFill", "Index", "CylinderFill", new { area = "CylinderTransaction" }, new { })</li>
+                    <li>@Html.ActionLink("Reports", "", "")</li>                
+    @*
+                    
                     <li>@Html.ActionLink("PageContent", "Index", "PageContent")</li>
                     <li>@Html.ActionLink("BlogContent", "Index", "BlogContent")</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>*@
