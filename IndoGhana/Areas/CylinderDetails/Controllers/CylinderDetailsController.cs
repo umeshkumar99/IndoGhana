@@ -25,7 +25,7 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
              
                 cylinderlist = InventoryEntities.usp_CylinderMasterGet().ToList();
                 return Json(cylinderlist, JsonRequestBehavior.AllowGet);
-    }
+            }
                 
             catch(Exception ex)
             {
@@ -39,8 +39,22 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             usp_CylinderMasterGetByID_Result cylinderDetails = new usp_CylinderMasterGetByID_Result();
             try
             {
-
                 cylinderDetails = InventoryEntities.usp_CylinderMasterGetByID(cylindernumber).FirstOrDefault();
+                ViewBag.InitialGasID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(4), "StatusID", "statusDesc");
+                ViewBag.WLCapacityUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
+                ViewBag.WorkingPressureUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
+                ViewBag.ValveModelID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(5), "StatusID", "statusDesc");
+                ViewBag.PresentStateID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(1), "StatusID", "statusDesc");
+                ViewBag.GasInUseID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(4), "StatusID", "statusDesc");
+                ViewBag.SizeUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
+                ViewBag.CurrentLocationID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(3), "StatusID", "statusDesc");
+                ViewBag.VendorID = new SelectList(InventoryEntities.usp_VendorListGet(), "VendorID", "VendorName");
+                ViewBag.VendorBranchID = new SelectList(InventoryEntities.usp_VendorBranchListGet(cylinderDetails.VendorID), "VendorBranchID", "VendorBranchName");
+
+
+
+                ViewBag.ManufacturerID = new SelectList(InventoryEntities.usp_ManufacturerMasterGet(), "ManufacturerID", "ManufacturerName");
+                
                 return View(cylinderDetails);
             }
 
@@ -49,11 +63,33 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                 return View();
             }
         }
+
+        public JsonResult getBranch(int id)
+        {
+            List<SelectListItem> BranchSelectList = new List<SelectListItem>();
+            List<usp_VendorBranchListGet_Result> BranchList = new List<usp_VendorBranchListGet_Result>();
+            //AddressModel address = new AddressModel();
+            BranchList=InventoryEntities.usp_VendorBranchListGet(id).ToList();
+            BranchList.ForEach(x =>
+            {
+                BranchSelectList.Add(new SelectListItem { Text = x.VendorBranchName, Value = x.VendorBranchID.ToString() });
+            });
+            return Json(new SelectList(BranchSelectList, "Value", "Text", JsonRequestBehavior.AllowGet));
+            }
+
+        
         [HttpPost]
         public ActionResult Edit(FormCollection frm)
         {
             return RedirectToAction("Index");
 
+        }
+        [HttpGet]
+        public ActionResult Detail(string cylindernumber)
+        {
+            usp_CylinderMasterGetByID_Result cylinderDetails = new usp_CylinderMasterGetByID_Result();
+            cylinderDetails = InventoryEntities.usp_CylinderMasterGetByID(cylindernumber).FirstOrDefault();
+            return View(cylinderDetails);
         }
     }
 }

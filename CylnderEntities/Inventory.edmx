@@ -260,7 +260,7 @@
           </FunctionImport>
           <FunctionImport Name="usp_CylinderMasterGet" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGet_Result)" />
           <FunctionImport Name="usp_CylinderMasterGetbyBarCode" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGetbyBarCode_Result)">
-            <Parameter Name="Barcode" Mode="In" Type="String" />
+          <Parameter Name="Barcode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_CylinderMasterGetByID" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGetByID_Result)">
             <Parameter Name="CylindeNumber" Mode="In" Type="String" />

@@ -12,7 +12,7 @@
              {
 
                  url: '@Url.Action("GetCylinderList")',
-                 
+
                  method: 'Get',
                  dataType: 'json',
 
@@ -29,29 +29,155 @@
                          [
 
                          { 'data': 'CylinderID' },
-                             { 'data': 'CylindeNumber' },
+                             {
+                                 'data': 'CylindeNumber',
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (CylindeNumber) {
+                                     if (CylindeNumber != '') {
+                                         var cy = CylindeNumber;
+                                         //var urltoredirect = location.href + "//CylinderDetails/CylinderDetails/Edit?cylindernumber="+CylindeNumber;
+                                         var urltoredirect = location.href + "/Edit?cylindernumber=" + CylindeNumber;
+                                         return '<a href=' + urltoredirect + '>' + CylindeNumber + '</a>'
+                                     }
+                                 }
+                             },
                               { 'data': 'Barcode' },
                              { 'data': 'ManufacturerName' },
-                             { 'data': 'PurchaseDate' },
+                             {
+                                 'data': 'PurchaseDate',
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (PurchaseDate) {
+                                     if (PurchaseDate != '' && PurchaseDate != null) {
+                                         var date = new Date(parseInt(PurchaseDate.substr(6)));
+                                         var month = date.getMonth() + 1;
+                                         return date.getDate() + "/" + month + "/" + date.getFullYear();
+
+                                     }
+                                     else
+                                         return 'NA'
+                                 }
+                             },
                              { 'data': 'InitialGas' },
                              { 'data': 'WLCapacity' },
                              { 'data': 'WorkingPressure' },
-                             { 'data': 'TestDate' },
-                             { 'data': 'NextTestDate' },
+                             {
+                                 'data': 'TestDate',
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (TestDate) {
+                                     if (TestDate != '' && TestDate!=null) {
+                                         var date =new Date(parseInt(TestDate.substr(6)));
+                                         var month = date.getMonth() + 1;
+                                         return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                 
+                                     }
+                                     else
+                                         return 'NA'
+                         }
+                             },
+                             {
+                                 'data': 'NextTestDate',
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (NextTestDate) {
+                                     if (NextTestDate != '' && NextTestDate!=null) {
+                                         var date = new Date(parseInt(NextTestDate.substr(6)));
+                                 var month = date.getMonth() + 1;
+                                 return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                 
+                             }
+                             else
+                                 return 'NA'
+                         }
+
+                             },
                              { 'data': 'ValveModel' },
                              { 'data': 'VendorName'},
                              { 'data': 'GasInUse'},
                              { 'data': 'Size'},
                              { 'data': 'ActualSize'},
                              { 'data': 'CustomerName'},
-                             { 'data': 'CurrentDeliveryDate'},
-                             { 'data': 'CurrentRecieveDate'},
+                             {
+                                 'data': 'CurrentDeliveryDate'
+                                 ,
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (CurrentDeliveryDate) {
+                                     if (CurrentDeliveryDate != '' && CurrentDeliveryDate!=null) {
+                                         var date = new Date(parseInt(CurrentDeliveryDate.substr(6)));
+                                         var month = date.getMonth() + 1;
+                                         return date.getDate() + "/" + month + "/" + date.getFullYear();
+
+                                     }
+                                     else
+                                         return 'NA'
+                                 }
+
+                             },
+                             {
+                                 'data': 'CurrentRecieveDate'
+                                 ,
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (CurrentRecieveDate) {
+                                     if (CurrentRecieveDate != '' && CurrentRecieveDate!=null) {
+                                         var date = new Date(parseInt(CurrentRecieveDate.substr(6)));
+                                         var month = date.getMonth() + 1;
+                                         return date.getDate() + "/" + month + "/" + date.getFullYear();
+
+                                     }
+                                     else
+                                         return 'NA'
+                                 }
+
+                             },
                              { 'data': 'CurrentLocation'},
                              { 'data': 'PresentState'},
-                             { 'data': 'status'}
+                             { 'data': 'status' },
+                             {
+                                 'data': 'CreationDate'
+                                 ,
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (CreationDate) {
+                                     if (CreationDate != '' && CreationDate != null) {
+                                         var date = new Date(parseInt(CreationDate.substr(6)));
+                                         var month = date.getMonth() + 1;
+                                         return date.getDate() + "/" + month + "/" + date.getFullYear();
+
+                                     }
+                                     else
+                                         return 'NA'
+                                 }
+
+                             },
+                             { 'data': 'CreatedBy' },
+                             {
+                                 'data': 'UpdatedBy'
+                             },
+                             {
+                                 'data': 'UpdatedOn'
+                                                                  ,
+                                 'searchable': true,
+                                 'sortable': true,
+                                 'render': function (UpdatedOn) {
+                                     if (UpdatedOn != '' && UpdatedOn != null) {
+                                         var date = new Date(parseInt(UpdatedOn.substr(6)));
+                                         var month = date.getMonth() + 1;
+                                         return date.getDate() + "/" + month + "/" + date.getFullYear();
+
+                                     }
+                                     else
+                                         return 'NA'
+                                 }
+
+
+                             }
                          ]
                      });
-                     
+
                  },
                  error: function (err) {
                      debugger;
@@ -106,7 +232,10 @@
                                     <th>CurrentLocation</th>
                                     <th>Present State</th>
                                     <th>Present Status</th>
-                                    
+                                    <th>CreationDate</th>
+                                    <th>CreatedBy</th>
+                                    <th>UpdatedBy</th>
+                                    <th>UpdatedOn</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
