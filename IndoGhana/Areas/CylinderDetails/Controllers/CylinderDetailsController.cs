@@ -91,5 +91,21 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             cylinderDetails = InventoryEntities.usp_CylinderMasterGetByID(cylindernumber).FirstOrDefault();
             return View(cylinderDetails);
         }
+        public ActionResult printbarcode(string cylindernumber)
+        {
+            usp_CylinderMasterGetBarcodeImage_Result barcodeImage = new usp_CylinderMasterGetBarcodeImage_Result();
+            barcodeImage = InventoryEntities.usp_CylinderMasterGetBarcodeImage(cylindernumber).FirstOrDefault();
+            return View(barcodeImage);
+        }
+        [HttpGet]
+        public ActionResult CreateCylinderDetails()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateCylinderDetails(FormCollection frm)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

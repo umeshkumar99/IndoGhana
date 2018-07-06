@@ -61,5 +61,6 @@ namespace CylnderEntities
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<bool> status { get; set; }
+        public string Path { get; set; }
     }
 }

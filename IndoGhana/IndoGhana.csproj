@@ -201,6 +201,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\200.gif" />
+    <Content Include="Images\print.png" />
+    <Content Include="Images\processing.gif" />
     <Content Include="Images\sort_asc.png" />
     <Content Include="Images\sort_desc.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -214,6 +216,8 @@
     <Content Include="Areas\CylinderTransaction\Views\CylinderFill\Index.cshtml" />
     <Content Include="Areas\CylinderDetails\Views\CylinderDetails\Index.cshtml" />
     <Content Include="Areas\CylinderDetails\Views\CylinderDetails\Detail.cshtml" />
+    <Content Include="Areas\CylinderDetails\Views\CylinderDetails\printbarcode.cshtml" />
+    <Content Include="Areas\CylinderDetails\Views\CylinderDetails\CreateCylinderDetails.cshtml" />
     <None Include="Properties\PublishProfiles\indoghanawebapp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\comman.js" />
@@ -277,6 +281,8 @@
     <Folder Include="Areas\Masters\Controllers\" />
     <Folder Include="Areas\Masters\Models\" />
     <Folder Include="Areas\Masters\Views\Shared\" />
+    <Folder Include="Images\Barcode\" />
+    <Folder Include="Images\ClientSignature\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

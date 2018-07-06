@@ -492,5 +492,14 @@ namespace CylnderEntities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetByID_Result>("usp_CylinderMasterGetByID", cylindeNumberParameter);
         }
+    
+        public virtual ObjectResult<usp_CylinderMasterGetBarcodeImage_Result> usp_CylinderMasterGetBarcodeImage(string cylindeNumber)
+        {
+            var cylindeNumberParameter = cylindeNumber != null ?
+                new ObjectParameter("CylindeNumber", cylindeNumber) :
+                new ObjectParameter("CylindeNumber", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetBarcodeImage_Result>("usp_CylinderMasterGetBarcodeImage", cylindeNumberParameter);
+        }
     }
 }

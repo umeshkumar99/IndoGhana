@@ -102,29 +102,30 @@
 
                        if (data != null) {
                            debugger;
-                           if (data.PresentState == "Filled" || data.PresentState == "Damaged") {
-                               alert("The scanned cylinder is either Filled or damaged. Please Contact supervisor to refill the Cylinder No.: " + data.CylindeNumber);
-                               $('#txtbarcode').focus();
+                           if (data.CylindeNumber != '') {
+                               if (data.PresentState == "Filled" || data.PresentState == "Damaged") {
+                                   alert("The scanned cylinder is either Filled or damaged. Please Contact supervisor to refill the Cylinder No.: " + data.CylindeNumber);
+                                   $('#txtbarcode').focus();
+                               }
+                               else {
+                                   Prodtbl.append('<tr id="tr' + count.toString() + '"><td>' +
+                                       //'<input  checked type="checkbox" class="chk name="chklistitem" /></td><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
+                             '<input  checked type="checkbox" class="chk" name="chklistitem" value="' + data.CylinderID + '" /></td><td>' + data.Barcode + '</td><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.ActualSize + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
+
+                                   count = count + 1;
+                                   ids.push(txtbarcodeval);
+                               }
+                               //$('.ddCont').html($('.ddCont').html()
+                               //    + '<br/><input  checked type="checkbox" />'
+                               //    + '<label for="' + data.VendorName + '" class="txt">' + data.VendorName + '</label>'
+                               //    + '<input type="text" readonly value=' + data.GasInUse + ' class="txt">'
+
+                               //    + '<input type="text" readonly value=' + data.Size + data.SizeUOM + ' class="txt">'
+                               //    + '<input type="text" readonly value=' + data.PresentState + ' class="txt">'
+                               //    );
+
+                               //$('#selectBarcode').append('<option value="' + txtbarcodeval + '" >' + txtbarcodeval + '</option>');
                            }
-                           else {
-                               Prodtbl.append('<tr id="tr' + count.toString() + '"><td>' +
-                                   //'<input  checked type="checkbox" class="chk name="chklistitem" /></td><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
-                         '<input  checked type="checkbox" class="chk" name="chklistitem" value="' + data.CylinderID + '" /></td><td>' + data.Barcode + '</td><td>' + data.CylindeNumber + '</td><td>' + data.VendorName + '</td><td>' + data.GasInUse + '</td><td>' + data.Size + data.SizeUOM + '</td><td>' + data.ActualSize + data.SizeUOM + '</td><td>' + data.PresentState + '</td></tr>');
-
-                               count = count + 1;
-                               ids.push(txtbarcodeval);
-                           }
-                           //$('.ddCont').html($('.ddCont').html()
-                           //    + '<br/><input  checked type="checkbox" />'
-                           //    + '<label for="' + data.VendorName + '" class="txt">' + data.VendorName + '</label>'
-                           //    + '<input type="text" readonly value=' + data.GasInUse + ' class="txt">'
-
-                           //    + '<input type="text" readonly value=' + data.Size + data.SizeUOM + ' class="txt">'
-                           //    + '<input type="text" readonly value=' + data.PresentState + ' class="txt">'
-                           //    );
-
-                           //$('#selectBarcode').append('<option value="' + txtbarcodeval + '" >' + txtbarcodeval + '</option>');
-
 
                            $('#txtbarcode').focus();
                        }

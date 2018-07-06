@@ -4,6 +4,7 @@
     ViewBag.Title = "Cylinder Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <script>
     $(document).ready(function () {
         $('#VendorID').change(function () {
@@ -34,6 +35,20 @@
                     <h4>Edit Cylider Details</h4>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Path, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <lable class="control-label col-md-2">Barcode</lable>
+                        <div class="col-md-6 col-lg-6  col-xs-12">
+                         @if (Model.Path != null && Model.Path != "")
+                         {
+                            <img src="@Url.Content(Model.Path)" style="width:192px;height:192px;" />
+                            @*<img src="~/Images/print.png" id="prnbarcode" />*@
+                            
+                            @Html.ActionLink("Print Barcode", "printbarcode", new { cylindernumber = Model.CylindeNumber }, htmlAttributes: new { @class = "btn btn-primary" })
+                         }
+                        </div>
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.CylinderID, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
