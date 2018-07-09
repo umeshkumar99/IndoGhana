@@ -35,9 +35,15 @@
                                  'sortable': true,
                                  'render': function (CylindeNumber) {
                                      if (CylindeNumber != '') {
-                                         var cy = CylindeNumber;
+                                         //var cy = CylindeNumber;
+                                         //var str = location.href;
+                                         //str = str.slice(0, str.lastIndexOf("/"));
+                                         //document.writeln('window.location.pathname=' +location.host+"/"+ window.location.pathname + "<br/>");
                                          //var urltoredirect = location.href + "//CylinderDetails/CylinderDetails/Edit?cylindernumber="+CylindeNumber;
-                                         var urltoredirect = location.origin +  "//CylinderDetails/CylinderDetails/Edit?cylindernumber=" + CylindeNumber;
+                                         //str = window.location.protocol+"//"+location.host + window.location.pathname;
+                                         var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/Edit?cylindernumber=" + CylindeNumber;
+                                         // var urltoredirect = str +  "//CylinderDetails/CylinderDetails/Edit?cylindernumber=" + CylindeNumber;
+                                        // document.writeln(urltoredirect+"<br/>");
                                          return '<a href=' + urltoredirect + '>' + CylindeNumber + '</a>'
                                      }
                                  }
@@ -199,8 +205,9 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xs-12">
-
-            <h3>Details of Cylinders</h3>
+            <div class="col-md-5 col-lg-5 col-xs-6"><h3>Details of Cylinders</h3></div>
+            <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Cylinder", "CreateCylinderDetails") </h4></div>
+            
         </div>
     </div>
 

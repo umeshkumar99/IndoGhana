@@ -113,103 +113,6 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerSiteMasterGetbyID_Result>("usp_CustomerSiteMasterGetbyID", customerIDParameter);
         }
     
-        public virtual ObjectResult<string> usp_CylinderMasterInsertUpdate(string cylindeNumber, string barcode, Nullable<int> manufacturer, Nullable<System.DateTime> purchaseDate, Nullable<int> initialGas, Nullable<int> wLCapacity, Nullable<int> wLCapacityUOMID, Nullable<int> workingPressure, Nullable<int> workingPressureUOMID, Nullable<System.DateTime> testDate, Nullable<System.DateTime> nextTestDate, Nullable<int> valveModel, Nullable<int> presentState, Nullable<int> gasInUse, Nullable<int> owner, Nullable<double> size, Nullable<int> sizeUOMID, Nullable<int> currentLocation, Nullable<int> branchid, Nullable<int> companyID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<bool> status)
-        {
-            var cylindeNumberParameter = cylindeNumber != null ?
-                new ObjectParameter("CylindeNumber", cylindeNumber) :
-                new ObjectParameter("CylindeNumber", typeof(string));
-    
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
-    
-            var manufacturerParameter = manufacturer.HasValue ?
-                new ObjectParameter("Manufacturer", manufacturer) :
-                new ObjectParameter("Manufacturer", typeof(int));
-    
-            var purchaseDateParameter = purchaseDate.HasValue ?
-                new ObjectParameter("PurchaseDate", purchaseDate) :
-                new ObjectParameter("PurchaseDate", typeof(System.DateTime));
-    
-            var initialGasParameter = initialGas.HasValue ?
-                new ObjectParameter("InitialGas", initialGas) :
-                new ObjectParameter("InitialGas", typeof(int));
-    
-            var wLCapacityParameter = wLCapacity.HasValue ?
-                new ObjectParameter("WLCapacity", wLCapacity) :
-                new ObjectParameter("WLCapacity", typeof(int));
-    
-            var wLCapacityUOMIDParameter = wLCapacityUOMID.HasValue ?
-                new ObjectParameter("WLCapacityUOMID", wLCapacityUOMID) :
-                new ObjectParameter("WLCapacityUOMID", typeof(int));
-    
-            var workingPressureParameter = workingPressure.HasValue ?
-                new ObjectParameter("WorkingPressure", workingPressure) :
-                new ObjectParameter("WorkingPressure", typeof(int));
-    
-            var workingPressureUOMIDParameter = workingPressureUOMID.HasValue ?
-                new ObjectParameter("WorkingPressureUOMID", workingPressureUOMID) :
-                new ObjectParameter("WorkingPressureUOMID", typeof(int));
-    
-            var testDateParameter = testDate.HasValue ?
-                new ObjectParameter("TestDate", testDate) :
-                new ObjectParameter("TestDate", typeof(System.DateTime));
-    
-            var nextTestDateParameter = nextTestDate.HasValue ?
-                new ObjectParameter("NextTestDate", nextTestDate) :
-                new ObjectParameter("NextTestDate", typeof(System.DateTime));
-    
-            var valveModelParameter = valveModel.HasValue ?
-                new ObjectParameter("ValveModel", valveModel) :
-                new ObjectParameter("ValveModel", typeof(int));
-    
-            var presentStateParameter = presentState.HasValue ?
-                new ObjectParameter("PresentState", presentState) :
-                new ObjectParameter("PresentState", typeof(int));
-    
-            var gasInUseParameter = gasInUse.HasValue ?
-                new ObjectParameter("GasInUse", gasInUse) :
-                new ObjectParameter("GasInUse", typeof(int));
-    
-            var ownerParameter = owner.HasValue ?
-                new ObjectParameter("Owner", owner) :
-                new ObjectParameter("Owner", typeof(int));
-    
-            var sizeParameter = size.HasValue ?
-                new ObjectParameter("Size", size) :
-                new ObjectParameter("Size", typeof(double));
-    
-            var sizeUOMIDParameter = sizeUOMID.HasValue ?
-                new ObjectParameter("SizeUOMID", sizeUOMID) :
-                new ObjectParameter("SizeUOMID", typeof(int));
-    
-            var currentLocationParameter = currentLocation.HasValue ?
-                new ObjectParameter("CurrentLocation", currentLocation) :
-                new ObjectParameter("CurrentLocation", typeof(int));
-    
-            var branchidParameter = branchid.HasValue ?
-                new ObjectParameter("Branchid", branchid) :
-                new ObjectParameter("Branchid", typeof(int));
-    
-            var companyIDParameter = companyID.HasValue ?
-                new ObjectParameter("CompanyID", companyID) :
-                new ObjectParameter("CompanyID", typeof(int));
-    
-            var createdByParameter = createdBy.HasValue ?
-                new ObjectParameter("CreatedBy", createdBy) :
-                new ObjectParameter("CreatedBy", typeof(int));
-    
-            var updateByParameter = updateBy.HasValue ?
-                new ObjectParameter("UpdateBy", updateBy) :
-                new ObjectParameter("UpdateBy", typeof(int));
-    
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CylinderMasterInsertUpdate", cylindeNumberParameter, barcodeParameter, manufacturerParameter, purchaseDateParameter, initialGasParameter, wLCapacityParameter, wLCapacityUOMIDParameter, workingPressureParameter, workingPressureUOMIDParameter, testDateParameter, nextTestDateParameter, valveModelParameter, presentStateParameter, gasInUseParameter, ownerParameter, sizeParameter, sizeUOMIDParameter, currentLocationParameter, branchidParameter, companyIDParameter, createdByParameter, updateByParameter, statusParameter);
-        }
-    
         public virtual ObjectResult<string> usp_CylinderMasterInsertUpdateMobile(string cylindeNumber, string barcode, Nullable<int> presentState, Nullable<int> gasInUse, Nullable<int> owner, Nullable<double> size, Nullable<int> sizeUOMID, Nullable<int> currentLocation, Nullable<int> currentCustomerBranchID, Nullable<int> branchid, Nullable<int> companyID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<bool> status)
         {
             var cylindeNumberParameter = cylindeNumber != null ?
@@ -401,23 +304,6 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VehicleMasterGetByID_Result>("usp_VehicleMasterGetByID", companyIDParameter, branchIDParameter, vehicleIDParameter);
         }
     
-        public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
-        {
-            var loginIdParameter = loginId != null ?
-                new ObjectParameter("LoginId", loginId) :
-                new ObjectParameter("LoginId", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("Phone", phone) :
-                new ObjectParameter("Phone", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
-        }
-    
         public virtual ObjectResult<usp_CustomerListGet_Result> usp_CustomerListGet()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerListGet_Result>("usp_CustomerListGet");
@@ -484,6 +370,32 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetbyBarCode_Result>("usp_CylinderMasterGetbyBarCode", barcodeParameter);
         }
     
+        public virtual ObjectResult<usp_CylinderMasterGetBarcodeImage_Result> usp_CylinderMasterGetBarcodeImage(string cylindeNumber)
+        {
+            var cylindeNumberParameter = cylindeNumber != null ?
+                new ObjectParameter("CylindeNumber", cylindeNumber) :
+                new ObjectParameter("CylindeNumber", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetBarcodeImage_Result>("usp_CylinderMasterGetBarcodeImage", cylindeNumberParameter);
+        }
+    
+        public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
+        {
+            var loginIdParameter = loginId != null ?
+                new ObjectParameter("LoginId", loginId) :
+                new ObjectParameter("LoginId", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
+        }
+    
         public virtual ObjectResult<usp_CylinderMasterGetByID_Result> usp_CylinderMasterGetByID(string cylindeNumber)
         {
             var cylindeNumberParameter = cylindeNumber != null ?
@@ -493,13 +405,101 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetByID_Result>("usp_CylinderMasterGetByID", cylindeNumberParameter);
         }
     
-        public virtual ObjectResult<usp_CylinderMasterGetBarcodeImage_Result> usp_CylinderMasterGetBarcodeImage(string cylindeNumber)
+        public virtual ObjectResult<string> usp_CylinderMasterInsertUpdate(string cylindeNumber, string barcode, Nullable<int> manufacturer, string purchaseDate, Nullable<int> initialGas, Nullable<int> wLCapacity, Nullable<int> wLCapacityUOMID, Nullable<int> workingPressure, Nullable<int> workingPressureUOMID, string testDate, string nextTestDate, Nullable<int> valveModel, Nullable<int> presentState, Nullable<int> gasInUse, Nullable<int> owner, Nullable<double> size, Nullable<int> sizeUOMID, Nullable<int> currentLocation, Nullable<int> branchid, Nullable<int> companyID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<bool> status)
         {
             var cylindeNumberParameter = cylindeNumber != null ?
                 new ObjectParameter("CylindeNumber", cylindeNumber) :
                 new ObjectParameter("CylindeNumber", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetBarcodeImage_Result>("usp_CylinderMasterGetBarcodeImage", cylindeNumberParameter);
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            var manufacturerParameter = manufacturer.HasValue ?
+                new ObjectParameter("Manufacturer", manufacturer) :
+                new ObjectParameter("Manufacturer", typeof(int));
+    
+            var purchaseDateParameter = purchaseDate != null ?
+                new ObjectParameter("PurchaseDate", purchaseDate) :
+                new ObjectParameter("PurchaseDate", typeof(string));
+    
+            var initialGasParameter = initialGas.HasValue ?
+                new ObjectParameter("InitialGas", initialGas) :
+                new ObjectParameter("InitialGas", typeof(int));
+    
+            var wLCapacityParameter = wLCapacity.HasValue ?
+                new ObjectParameter("WLCapacity", wLCapacity) :
+                new ObjectParameter("WLCapacity", typeof(int));
+    
+            var wLCapacityUOMIDParameter = wLCapacityUOMID.HasValue ?
+                new ObjectParameter("WLCapacityUOMID", wLCapacityUOMID) :
+                new ObjectParameter("WLCapacityUOMID", typeof(int));
+    
+            var workingPressureParameter = workingPressure.HasValue ?
+                new ObjectParameter("WorkingPressure", workingPressure) :
+                new ObjectParameter("WorkingPressure", typeof(int));
+    
+            var workingPressureUOMIDParameter = workingPressureUOMID.HasValue ?
+                new ObjectParameter("WorkingPressureUOMID", workingPressureUOMID) :
+                new ObjectParameter("WorkingPressureUOMID", typeof(int));
+    
+            var testDateParameter = testDate != null ?
+                new ObjectParameter("TestDate", testDate) :
+                new ObjectParameter("TestDate", typeof(string));
+    
+            var nextTestDateParameter = nextTestDate != null ?
+                new ObjectParameter("NextTestDate", nextTestDate) :
+                new ObjectParameter("NextTestDate", typeof(string));
+    
+            var valveModelParameter = valveModel.HasValue ?
+                new ObjectParameter("ValveModel", valveModel) :
+                new ObjectParameter("ValveModel", typeof(int));
+    
+            var presentStateParameter = presentState.HasValue ?
+                new ObjectParameter("PresentState", presentState) :
+                new ObjectParameter("PresentState", typeof(int));
+    
+            var gasInUseParameter = gasInUse.HasValue ?
+                new ObjectParameter("GasInUse", gasInUse) :
+                new ObjectParameter("GasInUse", typeof(int));
+    
+            var ownerParameter = owner.HasValue ?
+                new ObjectParameter("Owner", owner) :
+                new ObjectParameter("Owner", typeof(int));
+    
+            var sizeParameter = size.HasValue ?
+                new ObjectParameter("Size", size) :
+                new ObjectParameter("Size", typeof(double));
+    
+            var sizeUOMIDParameter = sizeUOMID.HasValue ?
+                new ObjectParameter("SizeUOMID", sizeUOMID) :
+                new ObjectParameter("SizeUOMID", typeof(int));
+    
+            var currentLocationParameter = currentLocation.HasValue ?
+                new ObjectParameter("CurrentLocation", currentLocation) :
+                new ObjectParameter("CurrentLocation", typeof(int));
+    
+            var branchidParameter = branchid.HasValue ?
+                new ObjectParameter("Branchid", branchid) :
+                new ObjectParameter("Branchid", typeof(int));
+    
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updateByParameter = updateBy.HasValue ?
+                new ObjectParameter("UpdateBy", updateBy) :
+                new ObjectParameter("UpdateBy", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CylinderMasterInsertUpdate", cylindeNumberParameter, barcodeParameter, manufacturerParameter, purchaseDateParameter, initialGasParameter, wLCapacityParameter, wLCapacityUOMIDParameter, workingPressureParameter, workingPressureUOMIDParameter, testDateParameter, nextTestDateParameter, valveModelParameter, presentStateParameter, gasInUseParameter, ownerParameter, sizeParameter, sizeUOMIDParameter, currentLocationParameter, branchidParameter, companyIDParameter, createdByParameter, updateByParameter, statusParameter);
         }
     }
 }

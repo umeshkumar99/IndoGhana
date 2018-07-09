@@ -120,6 +120,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cylinders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="usp_CustomerListGet_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>

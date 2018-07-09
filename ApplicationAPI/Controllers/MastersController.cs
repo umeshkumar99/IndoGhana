@@ -138,13 +138,14 @@ namespace ApplicationAPI.Controllers
             //String[] lines = { "First line from file ", "Second line from file", "Third line from file" };
             //File.WriteAllLines(@"D:\IndoGhana\API\log.txt", lines);
 
+        usp_tblStatusMasterGetByType_Result BarcodePath= InventoryEntities.usp_tblStatusMasterGetByType(8).FirstOrDefault();
             if (!Request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
             string root = HttpContext.Current.Server.MapPath("~/Content");
-            var provider = new MultipartFormDataStreamProvider(root);
+            var provider = new MultipartFormDataStreamProvider(BarcodePath.statusDesc.ToString());
 
             try
             {
@@ -173,7 +174,7 @@ namespace ApplicationAPI.Controllers
                     foreach (var file in provider.FileData)
                 {
                     FileInfo fileInfo = new FileInfo(file.LocalFileName);
-                    FileSystem.Rename(fileInfo.FullName, root +"\\" + filename);    
+                    FileSystem.Rename(fileInfo.FullName, BarcodePath.statusDesc.ToString()  + filename);    
                     //sb.Append(string.Format("Uploaded file: {0} ({1} bytes)\n", fileInfo.Name, fileInfo.Length));
                 }
 

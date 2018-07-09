@@ -28,5 +28,7 @@ namespace CylnderEntities
         public int VersionID { get; set; }
         public string VersionNo { get; set; }
         public int LoggedIn { get; set; }
+        public Nullable<int> VehicleID { get; set; }
+        public string VehicleNumber { get; set; }
     }
 }

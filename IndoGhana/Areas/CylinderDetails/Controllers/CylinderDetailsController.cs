@@ -40,21 +40,8 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             try
             {
                 cylinderDetails = InventoryEntities.usp_CylinderMasterGetByID(cylindernumber).FirstOrDefault();
-                ViewBag.InitialGasID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(4), "StatusID", "statusDesc");
-                ViewBag.WLCapacityUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
-                ViewBag.WorkingPressureUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
-                ViewBag.ValveModelID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(5), "StatusID", "statusDesc");
-                ViewBag.PresentStateID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(1), "StatusID", "statusDesc");
-                ViewBag.GasInUseID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(4), "StatusID", "statusDesc");
-                ViewBag.SizeUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
-                ViewBag.CurrentLocationID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(3), "StatusID", "statusDesc");
-                ViewBag.VendorID = new SelectList(InventoryEntities.usp_VendorListGet(), "VendorID", "VendorName");
+                FillViewBag();
                 ViewBag.VendorBranchID = new SelectList(InventoryEntities.usp_VendorBranchListGet(cylinderDetails.VendorID), "VendorBranchID", "VendorBranchName");
-
-
-
-                ViewBag.ManufacturerID = new SelectList(InventoryEntities.usp_ManufacturerMasterGet(), "ManufacturerID", "ManufacturerName");
-                
                 return View(cylinderDetails);
             }
 
@@ -63,6 +50,8 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                 return View();
             }
         }
+
+       
 
         public JsonResult getBranch(int id)
         {
@@ -81,8 +70,24 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
         [HttpPost]
         public ActionResult Edit(FormCollection frm)
         {
-            return RedirectToAction("Index");
 
+            try
+            {
+                usp_CylinderMasterGetByID_Result cylinder = new usp_CylinderMasterGetByID_Result();
+                TryUpdateModel(cylinder);
+                //bool b= int.TryParse(frm["WLCapacityUOMID"], out re);
+                object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, cylinder.CylindeNumber, cylinder.ManufacturerID,
+                    cylinder.PurchaseDate, cylinder.InitialGasID, cylinder.WLCapacity,
+                    cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
+                    cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
+                    cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
+                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, 1, 1, 1, 1, cylinder.status);
+                return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
         }
         [HttpGet]
         public ActionResult Detail(string cylindernumber)
@@ -100,12 +105,47 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
         [HttpGet]
         public ActionResult CreateCylinderDetails()
         {
+            FillViewBag();
             return View();
         }
         [HttpPost]
         public ActionResult CreateCylinderDetails(FormCollection frm)
         {
-            return RedirectToAction("Index");
+            try
+            {
+                usp_CylinderMasterGetByID_Result cylinder = new usp_CylinderMasterGetByID_Result();
+                TryUpdateModel(cylinder);
+                //bool b= int.TryParse(frm["WLCapacityUOMID"], out re);
+                object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, cylinder.CylindeNumber, cylinder.ManufacturerID,
+                    cylinder.PurchaseDate, cylinder.InitialGasID, cylinder.WLCapacity,
+                    cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
+                    cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
+                    cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
+                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, 1, 1, 1, 1, cylinder.status);
+                return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        private void FillViewBag()
+        {
+            ViewBag.InitialGasID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(4), "StatusID", "statusDesc");
+            ViewBag.WLCapacityUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
+            ViewBag.WorkingPressureUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
+            ViewBag.ValveModelID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(5), "StatusID", "statusDesc");
+            ViewBag.PresentStateID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(1), "StatusID", "statusDesc");
+            ViewBag.GasInUseID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(4), "StatusID", "statusDesc");
+            ViewBag.SizeUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
+            ViewBag.CurrentLocationID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(3), "StatusID", "statusDesc");
+            ViewBag.VendorID = new SelectList(InventoryEntities.usp_VendorListGet(), "VendorID", "VendorName");
+            
+
+
+
+            ViewBag.ManufacturerID = new SelectList(InventoryEntities.usp_ManufacturerMasterGet(), "ManufacturerID", "ManufacturerName");
+
         }
     }
 }
