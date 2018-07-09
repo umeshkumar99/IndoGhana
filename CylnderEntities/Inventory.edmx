@@ -238,11 +238,6 @@
           <FunctionImport Name="usp_CylinderMasterGetBarcodeImage" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGetBarcodeImage_Result)">
           <Parameter Name="CylindeNumber" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="USP_GetUserDetails" ReturnType="Collection(IndoGhanaModel.USP_GetUserDetails_Result)">
-            <Parameter Name="LoginId" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Phone" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="usp_CylinderMasterGetByID" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGetByID_Result)">
           <Parameter Name="CylindeNumber" Mode="In" Type="String" />
           </FunctionImport>
@@ -270,6 +265,11 @@
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdateBy" Mode="In" Type="Int32" />
             <Parameter Name="status" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="USP_GetUserDetails" ReturnType="Collection(IndoGhanaModel.USP_GetUserDetails_Result)">
+            <Parameter Name="LoginId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_tblStatusMasterGetByType_Result">
@@ -557,25 +557,6 @@
           <Property Type="String" Name="CylindeNumber" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="BarcodePath" Nullable="true" MaxLength="500" />
         </ComplexType>
-        <ComplexType Name="USP_GetUserDetails_Result">
-          <Property Type="Int32" Name="USer_Id" Nullable="false" />
-          <Property Type="String" Name="USer_Name" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IMIE1" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="IMIE2" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Login_Id" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="ApplicationID" Nullable="false" />
-          <Property Type="Int32" Name="Company_Id" Nullable="true" />
-          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Branch_Id" Nullable="true" />
-          <Property Type="String" Name="BranchName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="VersionID" Nullable="false" />
-          <Property Type="String" Name="VersionNo" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="LoggedIn" Nullable="false" />
-          <Property Type="Int32" Name="VehicleID" Nullable="true" />
-          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="usp_CylinderMasterGetByID_Result">
           <Property Type="Int32" Name="CylinderID" Nullable="false" />
           <Property Type="String" Name="CylindeNumber" Nullable="true" MaxLength="50" />
@@ -626,6 +607,26 @@
           <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="status" Nullable="true" />
           <Property Type="String" Name="Path" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="USP_GetUserDetails_Result">
+          <Property Type="Int32" Name="USer_Id" Nullable="false" />
+          <Property Type="String" Name="USer_Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IMIE1" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IMIE2" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Login_Id" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ApplicationID" Nullable="false" />
+          <Property Type="Int32" Name="Company_Id" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Branch_Id" Nullable="true" />
+          <Property Type="String" Name="BranchName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="VersionID" Nullable="false" />
+          <Property Type="String" Name="VersionNo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LoggedIn" Nullable="false" />
+          <Property Type="Int32" Name="VehicleID" Nullable="true" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ForDate" Nullable="true" MaxLength="8000" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -998,29 +999,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_GetUserDetails" FunctionName="IndoGhanaModel.Store.USP_GetUserDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IndoGhanaModel.USP_GetUserDetails_Result">
-                <ScalarProperty Name="USer_Id" ColumnName="USer_Id" />
-                <ScalarProperty Name="USer_Name" ColumnName="USer_Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
-                <ScalarProperty Name="IMIE1" ColumnName="IMIE1" />
-                <ScalarProperty Name="IMIE2" ColumnName="IMIE2" />
-                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
-                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
-                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Branch_Id" ColumnName="Branch_Id" />
-                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
-                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
-                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
-                <ScalarProperty Name="LoggedIn" ColumnName="LoggedIn" />
-                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
-                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_CylinderMasterGetByID" FunctionName="IndoGhanaModel.Store.usp_CylinderMasterGetByID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="IndoGhanaModel.usp_CylinderMasterGetByID_Result">
@@ -1077,6 +1055,30 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_CylinderMasterInsertUpdate" FunctionName="IndoGhanaModel.Store.usp_CylinderMasterInsertUpdate" />
+          <FunctionImportMapping FunctionImportName="USP_GetUserDetails" FunctionName="IndoGhanaModel.Store.USP_GetUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.USP_GetUserDetails_Result">
+                <ScalarProperty Name="USer_Id" ColumnName="USer_Id" />
+                <ScalarProperty Name="USer_Name" ColumnName="USer_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="IMIE1" ColumnName="IMIE1" />
+                <ScalarProperty Name="IMIE2" ColumnName="IMIE2" />
+                <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Branch_Id" ColumnName="Branch_Id" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="LoggedIn" ColumnName="LoggedIn" />
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="ForDate" ColumnName="ForDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

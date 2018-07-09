@@ -379,23 +379,6 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetBarcodeImage_Result>("usp_CylinderMasterGetBarcodeImage", cylindeNumberParameter);
         }
     
-        public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
-        {
-            var loginIdParameter = loginId != null ?
-                new ObjectParameter("LoginId", loginId) :
-                new ObjectParameter("LoginId", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("Phone", phone) :
-                new ObjectParameter("Phone", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
-        }
-    
         public virtual ObjectResult<usp_CylinderMasterGetByID_Result> usp_CylinderMasterGetByID(string cylindeNumber)
         {
             var cylindeNumberParameter = cylindeNumber != null ?
@@ -500,6 +483,23 @@ namespace CylnderEntities
                 new ObjectParameter("status", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CylinderMasterInsertUpdate", cylindeNumberParameter, barcodeParameter, manufacturerParameter, purchaseDateParameter, initialGasParameter, wLCapacityParameter, wLCapacityUOMIDParameter, workingPressureParameter, workingPressureUOMIDParameter, testDateParameter, nextTestDateParameter, valveModelParameter, presentStateParameter, gasInUseParameter, ownerParameter, sizeParameter, sizeUOMIDParameter, currentLocationParameter, branchidParameter, companyIDParameter, createdByParameter, updateByParameter, statusParameter);
+        }
+    
+        public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
+        {
+            var loginIdParameter = loginId != null ?
+                new ObjectParameter("LoginId", loginId) :
+                new ObjectParameter("LoginId", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
         }
     }
 }

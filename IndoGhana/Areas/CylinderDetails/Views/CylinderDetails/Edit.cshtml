@@ -16,6 +16,23 @@
             }
         });
 
+
+        $('#TestDate').change(function () {
+            debugger;
+            //alert($(this).val());
+            //NextTestDate
+            var testdt = new Date($(this).val());
+            var year = testdt.getFullYear() + 5;
+            var month = testdt.getMonth() + 1;
+            var day = testdt.getDate();
+            if (month.toString().length == 1)
+                month = "0" + month;
+            if (day.toString().length == 1)
+                day = "0" + day;
+            var newdt = new Date(year + 5, month, day)
+            $('#NextTestDate').val(year.toString() + "-" + month.toString() + "-" + day.toString());
+        });
+
     });
 </script>
 <div class="container" style="margin-top:50px;">

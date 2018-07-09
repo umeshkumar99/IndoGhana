@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CylnderEntities;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace IndoGhana.Areas.CylinderDetails.Controllers
 {
@@ -22,15 +25,15 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             List<usp_CylinderMasterGet_Result> cylinderlist = new List<usp_CylinderMasterGet_Result>();
             try
             {
-             
+
                 cylinderlist = InventoryEntities.usp_CylinderMasterGet().ToList();
                 return Json(cylinderlist, JsonRequestBehavior.AllowGet);
             }
-                
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
                 return View();
-}
+            }
 
         }
         [HttpGet]
@@ -51,22 +54,22 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             }
         }
 
-       
+
 
         public JsonResult getBranch(int id)
         {
             List<SelectListItem> BranchSelectList = new List<SelectListItem>();
             List<usp_VendorBranchListGet_Result> BranchList = new List<usp_VendorBranchListGet_Result>();
             //AddressModel address = new AddressModel();
-            BranchList=InventoryEntities.usp_VendorBranchListGet(id).ToList();
+            BranchList = InventoryEntities.usp_VendorBranchListGet(id).ToList();
             BranchList.ForEach(x =>
             {
                 BranchSelectList.Add(new SelectListItem { Text = x.VendorBranchName, Value = x.VendorBranchID.ToString() });
             });
             return Json(new SelectList(BranchSelectList, "Value", "Text", JsonRequestBehavior.AllowGet));
-            }
+        }
 
-        
+
         [HttpPost]
         public ActionResult Edit(FormCollection frm)
         {
@@ -76,7 +79,8 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                 usp_CylinderMasterGetByID_Result cylinder = new usp_CylinderMasterGetByID_Result();
                 TryUpdateModel(cylinder);
                 //bool b= int.TryParse(frm["WLCapacityUOMID"], out re);
-                object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, cylinder.CylindeNumber, cylinder.ManufacturerID,
+                string barcode = cylinder.CylindeNumber.ToString() + cylinder.VendorID.ToString() + cylinder.VendorBranchID.ToString();
+                object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, barcode, cylinder.ManufacturerID,
                     cylinder.PurchaseDate, cylinder.InitialGasID, cylinder.WLCapacity,
                     cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
                     cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
@@ -84,7 +88,7 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                     cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, 1, 1, 1, 1, cylinder.status);
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return RedirectToAction("Index");
             }
@@ -116,15 +120,17 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                 usp_CylinderMasterGetByID_Result cylinder = new usp_CylinderMasterGetByID_Result();
                 TryUpdateModel(cylinder);
                 //bool b= int.TryParse(frm["WLCapacityUOMID"], out re);
-                object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, cylinder.CylindeNumber, cylinder.ManufacturerID,
+                string barcode = cylinder.CylindeNumber.ToString() + cylinder.VendorID.ToString() + cylinder.VendorBranchID.ToString();
+                object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, barcode, cylinder.ManufacturerID,
                     cylinder.PurchaseDate, cylinder.InitialGasID, cylinder.WLCapacity,
                     cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
                     cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
                     cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
                     cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, 1, 1, 1, 1, cylinder.status);
+                GenerateBarcode(barcode);
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return RedirectToAction("Index");
             }
@@ -140,11 +146,50 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             ViewBag.SizeUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
             ViewBag.CurrentLocationID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(3), "StatusID", "statusDesc");
             ViewBag.VendorID = new SelectList(InventoryEntities.usp_VendorListGet(), "VendorID", "VendorName");
-            
+
 
 
 
             ViewBag.ManufacturerID = new SelectList(InventoryEntities.usp_ManufacturerMasterGet(), "ManufacturerID", "ManufacturerName");
+
+        }
+        private void GenerateBarcode(string barcode)
+        {
+            try
+            {
+                //
+
+
+                usp_tblStatusMasterGetByType_Result result  = InventoryEntities.usp_tblStatusMasterGetByType(8).FirstOrDefault();
+                string sPath = result.statusDesc;
+                Bitmap bitm = new Bitmap(barcode.Length * 45, 160);
+                using (Graphics graphic = Graphics.FromImage(bitm))
+                {
+
+
+                    Font newfont = new Font("IDAutomationHC39M", 20);
+                    PointF point = new PointF(2f, 2f);
+                    SolidBrush black = new SolidBrush(Color.Black);
+                    SolidBrush white = new SolidBrush(Color.White);
+                    graphic.FillRectangle(white, 0, 0, bitm.Width, bitm.Height);
+                    graphic.DrawString("*" + barcode + "*", newfont, black, point);
+
+
+                }
+
+                using (MemoryStream Mmst = new MemoryStream())
+                {
+
+
+                    //bitm.Save("ms", ImageFormat.Jpeg);
+                    bitm.Save(sPath + barcode + ".png");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
     }
