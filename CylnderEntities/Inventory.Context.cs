@@ -388,7 +388,24 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CylinderMasterGetByID_Result>("usp_CylinderMasterGetByID", cylindeNumberParameter);
         }
     
-        public virtual ObjectResult<string> usp_CylinderMasterInsertUpdate(string cylindeNumber, string barcode, Nullable<int> manufacturer, string purchaseDate, Nullable<int> initialGas, Nullable<int> wLCapacity, Nullable<int> wLCapacityUOMID, Nullable<int> workingPressure, Nullable<int> workingPressureUOMID, string testDate, string nextTestDate, Nullable<int> valveModel, Nullable<int> presentState, Nullable<int> gasInUse, Nullable<int> owner, Nullable<double> size, Nullable<int> sizeUOMID, Nullable<int> currentLocation, Nullable<int> branchid, Nullable<int> companyID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<bool> status)
+        public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
+        {
+            var loginIdParameter = loginId != null ?
+                new ObjectParameter("LoginId", loginId) :
+                new ObjectParameter("LoginId", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
+        }
+    
+        public virtual ObjectResult<string> usp_CylinderMasterInsertUpdate(string cylindeNumber, string barcode, Nullable<int> manufacturer, string purchaseDate, Nullable<int> initialGas, Nullable<int> wLCapacity, Nullable<int> wLCapacityUOMID, Nullable<int> workingPressure, Nullable<int> workingPressureUOMID, string testDate, string nextTestDate, Nullable<int> valveModel, Nullable<int> presentState, Nullable<int> gasInUse, Nullable<int> owner, Nullable<double> size, Nullable<int> sizeUOMID, Nullable<int> currentLocation, Nullable<int> currentCustomerBranchID, Nullable<int> branchid, Nullable<int> companyID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<bool> status)
         {
             var cylindeNumberParameter = cylindeNumber != null ?
                 new ObjectParameter("CylindeNumber", cylindeNumber) :
@@ -462,6 +479,10 @@ namespace CylnderEntities
                 new ObjectParameter("CurrentLocation", currentLocation) :
                 new ObjectParameter("CurrentLocation", typeof(int));
     
+            var currentCustomerBranchIDParameter = currentCustomerBranchID.HasValue ?
+                new ObjectParameter("CurrentCustomerBranchID", currentCustomerBranchID) :
+                new ObjectParameter("CurrentCustomerBranchID", typeof(int));
+    
             var branchidParameter = branchid.HasValue ?
                 new ObjectParameter("Branchid", branchid) :
                 new ObjectParameter("Branchid", typeof(int));
@@ -482,24 +503,7 @@ namespace CylnderEntities
                 new ObjectParameter("status", status) :
                 new ObjectParameter("status", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CylinderMasterInsertUpdate", cylindeNumberParameter, barcodeParameter, manufacturerParameter, purchaseDateParameter, initialGasParameter, wLCapacityParameter, wLCapacityUOMIDParameter, workingPressureParameter, workingPressureUOMIDParameter, testDateParameter, nextTestDateParameter, valveModelParameter, presentStateParameter, gasInUseParameter, ownerParameter, sizeParameter, sizeUOMIDParameter, currentLocationParameter, branchidParameter, companyIDParameter, createdByParameter, updateByParameter, statusParameter);
-        }
-    
-        public virtual ObjectResult<USP_GetUserDetails_Result> USP_GetUserDetails(string loginId, string password, string phone)
-        {
-            var loginIdParameter = loginId != null ?
-                new ObjectParameter("LoginId", loginId) :
-                new ObjectParameter("LoginId", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("Phone", phone) :
-                new ObjectParameter("Phone", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CylinderMasterInsertUpdate", cylindeNumberParameter, barcodeParameter, manufacturerParameter, purchaseDateParameter, initialGasParameter, wLCapacityParameter, wLCapacityUOMIDParameter, workingPressureParameter, workingPressureUOMIDParameter, testDateParameter, nextTestDateParameter, valveModelParameter, presentStateParameter, gasInUseParameter, ownerParameter, sizeParameter, sizeUOMIDParameter, currentLocationParameter, currentCustomerBranchIDParameter, branchidParameter, companyIDParameter, createdByParameter, updateByParameter, statusParameter);
         }
     }
 }

@@ -7,6 +7,8 @@ using CylnderEntities;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using ZXing.OneD;
+using ZXing;
 
 namespace IndoGhana.Areas.CylinderDetails.Controllers
 {
@@ -56,18 +58,6 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
 
 
 
-        public JsonResult getBranch(int id)
-        {
-            List<SelectListItem> BranchSelectList = new List<SelectListItem>();
-            List<usp_VendorBranchListGet_Result> BranchList = new List<usp_VendorBranchListGet_Result>();
-            //AddressModel address = new AddressModel();
-            BranchList = InventoryEntities.usp_VendorBranchListGet(id).ToList();
-            BranchList.ForEach(x =>
-            {
-                BranchSelectList.Add(new SelectListItem { Text = x.VendorBranchName, Value = x.VendorBranchID.ToString() });
-            });
-            return Json(new SelectList(BranchSelectList, "Value", "Text", JsonRequestBehavior.AllowGet));
-        }
 
 
         [HttpPost]
@@ -85,7 +75,7 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                     cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
                     cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
                     cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
-                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, 1, 1, 1, 1, cylinder.status);
+                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, cylinder.CurrentCustomerBranchID,1, 1, 1, 1, cylinder.status);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -126,7 +116,7 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                     cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
                     cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
                     cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
-                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, 1, 1, 1, 1, cylinder.status);
+                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, cylinder.CurrentCustomerBranchID,1, 1, 1, 1, cylinder.status);
                 GenerateBarcode(barcode);
                 return RedirectToAction("Index");
             }
@@ -146,12 +136,39 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             ViewBag.SizeUOMID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(7), "StatusID", "statusDesc");
             ViewBag.CurrentLocationID = new SelectList(InventoryEntities.usp_tblStatusMasterGetByType(3), "StatusID", "statusDesc");
             ViewBag.VendorID = new SelectList(InventoryEntities.usp_VendorListGet(), "VendorID", "VendorName");
-
+            ViewBag.CustomerID = new SelectList(InventoryEntities.usp_CustomerListGet(), "CustomerID", "CustomerName");
 
 
 
             ViewBag.ManufacturerID = new SelectList(InventoryEntities.usp_ManufacturerMasterGet(), "ManufacturerID", "ManufacturerName");
 
+        }
+
+        public JsonResult getBranch(int id)
+        {
+            List<SelectListItem> BranchSelectList = new List<SelectListItem>();
+            List<usp_VendorBranchListGet_Result> BranchList = new List<usp_VendorBranchListGet_Result>();
+            //AddressModel address = new AddressModel();
+            BranchList = InventoryEntities.usp_VendorBranchListGet(id).ToList();
+            BranchList.ForEach(x =>
+            {
+                BranchSelectList.Add(new SelectListItem { Text = x.VendorBranchName, Value = x.VendorBranchID.ToString() });
+            });
+            return Json(new SelectList(BranchSelectList, "Value", "Text", JsonRequestBehavior.AllowGet));
+        }
+
+
+        public JsonResult getCustomerBranch(int id)
+        {
+            List<SelectListItem> BranchSelectList = new List<SelectListItem>();
+            List<usp_CustomerSiteListGet_Result> BranchList = new List<usp_CustomerSiteListGet_Result>();
+            //AddressModel address = new AddressModel();
+            BranchList = InventoryEntities.usp_CustomerSiteListGet(id).ToList();
+            BranchList.ForEach(x =>
+            {
+                BranchSelectList.Add(new SelectListItem { Text = x.SiteName, Value = x.CustomerSiteID.ToString() });
+            });
+            return Json(new SelectList(BranchSelectList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
         private void GenerateBarcode(string barcode)
         {
@@ -160,29 +177,35 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                 //
 
 
+                var writer = new ZXing.BarcodeWriter
+                {
+                    Format = BarcodeFormat.CODE_128
+                };
+                Bitmap bitmap = writer.Write(barcode);
+
                 usp_tblStatusMasterGetByType_Result result  = InventoryEntities.usp_tblStatusMasterGetByType(8).FirstOrDefault();
                 string sPath = result.statusDesc;
-                Bitmap bitm = new Bitmap(barcode.Length * 45, 160);
-                using (Graphics graphic = Graphics.FromImage(bitm))
-                {
+                //Bitmap bitm = new Bitmap(barcode.Length * 45, 160);
+                //using (Graphics graphic = Graphics.FromImage(bitm))
+                //{
 
 
-                    Font newfont = new Font("IDAutomationHC39M", 20);
-                    PointF point = new PointF(2f, 2f);
-                    SolidBrush black = new SolidBrush(Color.Black);
-                    SolidBrush white = new SolidBrush(Color.White);
-                    graphic.FillRectangle(white, 0, 0, bitm.Width, bitm.Height);
-                    graphic.DrawString("*" + barcode + "*", newfont, black, point);
+                //    Font newfont = new Font("IDAutomationHC39M", 20);
+                //    PointF point = new PointF(2f, 2f);
+                //    SolidBrush black = new SolidBrush(Color.Black);
+                //    SolidBrush white = new SolidBrush(Color.White);
+                //    graphic.FillRectangle(white, 0, 0, bitm.Width, bitm.Height);
+                //    graphic.DrawString("*" + barcode + "*", newfont, black, point);
 
 
-                }
+                //}
 
                 using (MemoryStream Mmst = new MemoryStream())
                 {
 
 
                     //bitm.Save("ms", ImageFormat.Jpeg);
-                    bitm.Save(sPath + barcode + ".png");
+                    bitmap.Save(sPath + barcode + ".png");
 
                 }
             }

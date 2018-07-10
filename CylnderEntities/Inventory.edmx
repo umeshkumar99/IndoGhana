@@ -60,6 +60,7 @@
           <Parameter Name="Size" Type="float" Mode="In" />
           <Parameter Name="SizeUOMID" Type="int" Mode="In" />
           <Parameter Name="CurrentLocation" Type="int" Mode="In" />
+          <Parameter Name="CurrentCustomerBranchID" Type="int" Mode="In" />
           <Parameter Name="Branchid" Type="int" Mode="In" />
           <Parameter Name="CompanyID" Type="int" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
@@ -241,6 +242,11 @@
           <FunctionImport Name="usp_CylinderMasterGetByID" ReturnType="Collection(IndoGhanaModel.usp_CylinderMasterGetByID_Result)">
           <Parameter Name="CylindeNumber" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="USP_GetUserDetails" ReturnType="Collection(IndoGhanaModel.USP_GetUserDetails_Result)">
+            <Parameter Name="LoginId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="usp_CylinderMasterInsertUpdate" ReturnType="Collection(String)">
             <Parameter Name="CylindeNumber" Mode="In" Type="String" />
             <Parameter Name="Barcode" Mode="In" Type="String" />
@@ -260,16 +266,12 @@
             <Parameter Name="Size" Mode="In" Type="Double" />
             <Parameter Name="SizeUOMID" Mode="In" Type="Int32" />
             <Parameter Name="CurrentLocation" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentCustomerBranchID" Mode="In" Type="Int32" />
             <Parameter Name="Branchid" Mode="In" Type="Int32" />
             <Parameter Name="CompanyID" Mode="In" Type="Int32" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdateBy" Mode="In" Type="Int32" />
             <Parameter Name="status" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="USP_GetUserDetails" ReturnType="Collection(IndoGhanaModel.USP_GetUserDetails_Result)">
-            <Parameter Name="LoginId" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Phone" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_tblStatusMasterGetByType_Result">
@@ -1054,7 +1056,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_CylinderMasterInsertUpdate" FunctionName="IndoGhanaModel.Store.usp_CylinderMasterInsertUpdate" />
           <FunctionImportMapping FunctionImportName="USP_GetUserDetails" FunctionName="IndoGhanaModel.Store.USP_GetUserDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="IndoGhanaModel.USP_GetUserDetails_Result">
@@ -1079,6 +1080,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CylinderMasterInsertUpdate" FunctionName="IndoGhanaModel.Store.usp_CylinderMasterInsertUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

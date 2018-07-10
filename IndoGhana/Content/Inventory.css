@@ -4,7 +4,18 @@
 	background: none;
 	font-family: "Open Sans" , "Helvetica Neue" ,Helvetica,Arial,sans-serif;
 }
+ .table th {
+    
+    background-color:rgba(27,100,168,1);
+    color:white;
+    font-weight:bold;
+    }
 
+
+.nopadding
+{
+    padding:0px!important;
+}
 .navbar-default .navbar-brand
 {
    

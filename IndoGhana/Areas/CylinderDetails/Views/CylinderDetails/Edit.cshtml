@@ -71,7 +71,8 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.CylindeNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
-                            @Html.EditorFor(model => model.CylindeNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DisplayFor(model => model.CylindeNumber)
+                                @*@Html.EditorFor(model => model.CylindeNumber, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.ValidationMessageFor(model => model.CylindeNumber, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -99,7 +100,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
-                            @Html.EditorFor(model => model.PurchaseDate, new { type = "date" })
+                            @Html.EditorFor(model => model.PurchaseDate,  new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -110,21 +111,21 @@
                         @Html.LabelFor(model => model.InitialGas, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
                             
-                            @Html.DropDownListFor(model => model.InitialGasID, ViewBag.InitialGasID as List<SelectListItem>, "Select Initial Gas")
+                            @Html.DropDownListFor(model => model.InitialGasID, ViewBag.InitialGasID as List<SelectListItem>, "Select Initial Gas", new { htmlAttributes = new { @class = "dropdown" } })
                             @Html.ValidationMessageFor(model => model.InitialGasID, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
 
-                    <div class="form-group" style="padding-left:-43px;">
+                    <div class="form-group">
                         @Html.LabelFor(model => model.WLCapacity, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-8 col-lg-8  col-xs-12">
-                            <div class="col-md-4 col-lg-4  col-xs-6">
+                        <div class="col-md-8 col-lg-8  col-xs-12" >
+                            <div class="col-md-4 col-lg-4  col-xs-6" style="padding:0px;">
                                 @Html.EditorFor(model => model.WLCapacity, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.WLCapacity, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4 col-lg-4  col-xs-6">
-                            @Html.DropDownListFor(model => model.WLCapacityUOMID, ViewBag.WLCapacityUOMID as List<SelectListItem>, "Select UOM", new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => model.WLCapacityUOMID, ViewBag.WLCapacityUOMID as List<SelectListItem>, "Select UOM", new { htmlAttributes = new { @class = "dropdown" } })
                             @Html.ValidationMessageFor(model => model.WLCapacityUOMID, "", new { @class = "text-danger" })
                         </div>
 
@@ -134,15 +135,15 @@
                 </div>
 
                     
-                    <div class="form-group" style="padding-left:-43px;">
+                    <div class="form-group" >
                         @Html.LabelFor(model => model.WorkingPressure, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-8 col-lg-8  col-xs-12">
-                            <div class="col-md-4 col-lg-4  col-xs-6">
+                            <div class="col-md-4 col-lg-4  col-xs-6" style="padding:0px;">
                                 @Html.EditorFor(model => model.WorkingPressure, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.WorkingPressure, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4 col-lg-4  col-xs-6">
-                            @Html.DropDownListFor(model => model.WorkingPressureUOMID, ViewBag.WorkingPressureUOMID as List<SelectListItem>, "Select Location")
+                            @Html.DropDownListFor(model => model.WorkingPressureUOMID, ViewBag.WorkingPressureUOMID as List<SelectListItem>, "Select Location", new { htmlAttributes = new { @class = "dropdown" } })
                             @Html.ValidationMessageFor(model => model.WorkingPressureUOMID, "", new { @class = "text-danger" })
                         </div>
 
@@ -186,7 +187,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.PresentState, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
-                            @*@Html.EditorFor(model => model.PresentState, new { htmlAttributes = new { @class = "form-control" } })*@
+                            
                             @Html.DropDownListFor(model => model.PresentStateID, ViewBag.PresentStateID as List<SelectListItem>, "Select Present State")
                             @Html.ValidationMessageFor(model => model.PresentStateID, "", new { @class = "text-danger" })
                         </div>
@@ -198,7 +199,6 @@
                         @Html.LabelFor(model => model.GasInUse, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
                             @Html.DropDownListFor(model => model.GasInUseID, ViewBag.GasInUseID as List<SelectListItem>, "Select Gas In Use")
-                            @*@Html.EditorFor(model => model.GasInUse, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.ValidationMessageFor(model => model.GasInUseID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -210,23 +210,26 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.VendorName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-8 col-lg-8  col-xs-12">
-                            @*@Html.EditorFor(model => model.VendorName, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @Html.DropDownListFor(model => model.VendorID, ViewBag.VendorID as List<SelectListItem>, "Select Vendor Name", htmlAttributes: new { @class = "dropdown" })
-                            @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "text-danger" })
-                            @Html.DropDownListFor(model => model.VendorBranchID, ViewBag.VendorBranchID as List<SelectListItem>, "Select Branch Name", htmlAttributes: new { @class = "dropdown" })
-                            @Html.ValidationMessageFor(model => model.VendorBranchID, "", new { @class = "text-danger" })
-                        </div>
+                            <div class="col-md-4 col-lg-4  col-xs-6" style="padding:0px;">
+                                @Html.DropDownListFor(model => model.VendorID, ViewBag.VendorID as List<SelectListItem>, "Select Vendor Name", htmlAttributes: new { @class = "dropdown" })
+                                @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "text-danger" })
+                                </div>
+                            <div class="col-md-4 col-lg-4  col-xs-6">
+                                @Html.DropDownListFor(model => model.VendorBranchID, ViewBag.VendorBranchID as List<SelectListItem>, "Select Branch Name", htmlAttributes: new { @class = "dropdown" })
+                                @Html.ValidationMessageFor(model => model.VendorBranchID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                     </div>
 
-                    <div class="form-group" style="padding-left:1px;">
+                    <div class="form-group" >
                         @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-8 col-lg-8  col-xs-12">
-                            <div class="col-md-4 col-lg-4  col-xs-6">
+                            <div class="col-md-4 col-lg-4  col-xs-6" style="padding:0px;">
                                 @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4 col-lg-4  col-xs-6">
-                            @Html.DropDownListFor(model => model.SizeUOMID, ViewBag.SizeUOMID as List<SelectListItem>, "Select UOM")
+                            @Html.DropDownListFor(model => model.SizeUOMID, ViewBag.SizeUOMID as List<SelectListItem>, "Select UOM", new { htmlAttributes = new { @class = "dropdown" } })
                             @Html.ValidationMessageFor(model => model.SizeUOMID, "", new { @class = "text-danger" })
                         </div>
 
@@ -236,11 +239,6 @@
                 </div>
 
                     
-
-
-
-
-
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
