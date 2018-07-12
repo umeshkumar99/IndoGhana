@@ -55,6 +55,7 @@ namespace IndoGhana.Areas.Login.Controllers
 
         public ActionResult EditUser(int User_Id)
         {
+            FillViewBag();
             usp_tblUserMasterGetByID_Result userdetails= InventoryEntities.usp_tblUserMasterGetByID(User_Id).FirstOrDefault();
             return View(userdetails);
         }
@@ -65,6 +66,7 @@ namespace IndoGhana.Areas.Login.Controllers
         }
         public ActionResult CreateUserDetails()
         {
+            FillViewBag();
             return View();
         }
        [HttpPost]
@@ -72,5 +74,11 @@ namespace IndoGhana.Areas.Login.Controllers
         {
             return View();
         }
+        private void FillViewBag()
+        {
+            ViewBag.Group_Id = new SelectList(InventoryEntities.usp_tblGroupGet(), "Group_Id", "Group_Name");
+            ViewBag.Branch_Id = new SelectList(InventoryEntities.usp_tblCompanyBranchMasterListGet(), "BranchId", "BranchName");
+            
+        }
+        }
     }
-}

@@ -118,6 +118,7 @@
           <Parameter Name="BranchID" Type="int" Mode="In" />
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_tblCompanyBranchMasterListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_tblCylinderFillInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cylindeIDs" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
@@ -395,6 +396,7 @@
             <Parameter Name="VersionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_tblGroupGet" ReturnType="Collection(IndoGhanaModel.usp_tblGroupGet_Result)" />
+          <FunctionImport Name="usp_tblCompanyBranchMasterListGet" ReturnType="Collection(IndoGhanaModel.usp_tblCompanyBranchMasterListGet_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_tblStatusMasterGetByType_Result">
           <Property Type="Int32" Name="StatusID" Nullable="false" />
@@ -801,6 +803,10 @@
         <ComplexType Name="usp_tblGroupGet_Result">
           <Property Type="Int32" Name="Group_Id" Nullable="false" />
           <Property Type="String" Name="Group_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_tblCompanyBranchMasterListGet_Result">
+          <Property Type="Int64" Name="BranchId" Nullable="false" />
+          <Property Type="String" Name="BranchName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1316,6 +1322,14 @@
               <ComplexTypeMapping TypeName="IndoGhanaModel.usp_tblGroupGet_Result">
                 <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
                 <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_tblCompanyBranchMasterListGet" FunctionName="IndoGhanaModel.Store.usp_tblCompanyBranchMasterListGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_tblCompanyBranchMasterListGet_Result">
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

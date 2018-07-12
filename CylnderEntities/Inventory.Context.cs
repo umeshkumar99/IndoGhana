@@ -736,5 +736,10 @@ namespace CylnderEntities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblGroupGet_Result>("usp_tblGroupGet");
         }
+    
+        public virtual ObjectResult<usp_tblCompanyBranchMasterListGet_Result> usp_tblCompanyBranchMasterListGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblCompanyBranchMasterListGet_Result>("usp_tblCompanyBranchMasterListGet");
+        }
     }
 }
