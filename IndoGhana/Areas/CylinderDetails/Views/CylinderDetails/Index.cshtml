@@ -38,16 +38,8 @@
                                  'sortable': true,
                                  'render': function (CylindeNumber) {
                                      if (CylindeNumber != '') {
-                                         //var cy = CylindeNumber;
-                                         //var str = location.href;
-                                         //str = str.slice(0, str.lastIndexOf("/"));
-                                         //document.writeln('window.location.pathname=' +location.host+"/"+ window.location.pathname + "<br/>");
-                                         //var urltoredirect = location.href + "//CylinderDetails/CylinderDetails/Edit?cylindernumber="+CylindeNumber;
-                                         //str = window.location.protocol+"//"+location.host + window.location.pathname;
-                                         var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/Edit?cylindernumber=" + CylindeNumber;
-                                         // var urltoredirect = str +  "//CylinderDetails/CylinderDetails/Edit?cylindernumber=" + CylindeNumber;
-                                        // document.writeln(urltoredirect+"<br/>");
-                                         return '<a href=' + urltoredirect + '>' + CylindeNumber + '</a>'
+                                        var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/Edit?cylindernumber=" + CylindeNumber;
+                                        return '<a href=' + urltoredirect + '>' + CylindeNumber + '</a>'
                                      }
                                  }
                              },
@@ -221,8 +213,7 @@
                             <thead>
                                 <tr>
                                     <th>CylinderID</th>
-                                    
-                                    <th>Cylinder No.</th>
+                                     <th>Cylinder No.</th>
                                     <th>Barcode</th>
                                     <th>ManufacturerName</th>
                                     <th>PurchaseDate</th>

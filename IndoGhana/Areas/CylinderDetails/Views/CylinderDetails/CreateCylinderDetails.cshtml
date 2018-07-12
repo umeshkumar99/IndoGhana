@@ -8,6 +8,19 @@
 <script>
     $(document).ready(function () {
         //
+
+        $("select").searchable({
+            maxListSize: 200, // if list size are less than maxListSize, show them all
+            maxMultiMatch: 300, // how many matching entries should be displayed
+            exactMatch: false, // Exact matching on search
+            wildcards: true, // Support for wildcard characters (*, ?)
+            ignoreCase: true, // Ignore case sensitivity
+            latency: 200, // how many millis to wait until starting search
+            warnMultiMatch: 'top {0} matches ...',
+            warnNoMatch: 'no matches ...',
+            zIndex: 'auto'
+        });
+
         $('#VendorID').change(function () {
             //alert('vendor');
             debugger;
@@ -24,6 +37,23 @@
                 fillDropdown($('#CurrentCustomerBranchID'), '@Url.Action("getCustomerBranch")', document.getElementById('CustomerID').value);
             }
         });
+
+        $('#CurrentLocationID').change(function () {
+            //alert('vendor');
+            debugger;
+            var CurrentLocation = document.getElementById("CurrentLocationID");
+            var selectedText = CurrentLocation.options[CurrentLocation.selectedIndex].text;
+            if (selectedText == "WareHouse") {
+                $("#CustomerID").prop("disabled", true);
+                $("#CurrentCustomerBranchID").prop("disabled", true);
+               
+            }
+            else {
+                $("#CustomerID").prop("disabled", false);
+                $("#CurrentCustomerBranchID").prop("disabled", false);
+            }
+        });
+        
 
         $('#TestDate').change(function () {
             debugger;
@@ -141,14 +171,6 @@
         </div>
 
 
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.WorkingPressureUOM, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4 col-lg-4  col-xs-12">
-
-                </div>
-            </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.TestDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4 col-lg-4  col-xs-12">
@@ -203,7 +225,7 @@
             @Html.LabelFor(model => model.VendorName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8 col-lg-8  col-xs-12">
                 <div class="col-md-4 col-lg-4  col-xs-6" style="padding:0px;">
-                    @Html.DropDownListFor(model => model.VendorID, ViewBag.VendorID as List<SelectListItem>, "Select Vendor Name", htmlAttributes: new { @class = "dropdown" })
+                    @Html.DropDownListFor(model => model.VendorID, ViewBag.VendorID as List<SelectListItem>, "Select Owner Name", htmlAttributes: new { @class = "dropdown" })
                     @Html.ValidationMessageFor(model => model.VendorID, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4 col-lg-4  col-xs-6">
@@ -234,11 +256,23 @@
         </div>
 
 
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4 col-lg-4  col-xs-12">
+
+                    @Html.DropDownListFor(model => model.CurrentLocationID, ViewBag.CurrentLocationID as List<SelectListItem>, "Select Location", new { htmlAttributes = new { @class = "dropdown" } })
+                    @Html.ValidationMessageFor(model => model.CurrentLocationID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8 col-lg-8  col-xs-12">
                 <div class="col-md-4 col-lg-4  col-xs-6" style="padding:0px;">
-                    @Html.DropDownListFor(model => model.CustomerID, ViewBag.CustomerID as List<SelectListItem>, "Select Customer Name", htmlAttributes: new { @class = "dropdown" })
+                    @Html.DropDownListFor(model => model.CustomerID, ViewBag.CustomerID as List<SelectListItem>, "Select Custo Name", htmlAttributes: new { @class = "dropdown" })
                     @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-4 col-lg-4  col-xs-6">
@@ -250,49 +284,6 @@
 
 
 
-
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4 col-lg-4  col-xs-12">
-                @Html.LabelFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })*@
-        @Html.DisplayFor(model => model.CustomerName)
-
-
-        @*@Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.CurrentDeliveryDate, new { @class = "control-label col-md-2" })
-                <div class="col-md-4 col-lg-4  col-xs-12">
-                    @Html.DisplayFor(model => model.CurrentDeliveryDate)
-                    @Html.EditorFor(model => model.CurrentDeliveryDate, new { type = "date" })
-                    @Html.ValidationMessageFor(model => model.CurrentDeliveryDate, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.CurrentRecieveDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4 col-lg-4  col-xs-12">
-                    @Html.EditorFor(model => model.CurrentRecieveDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.DisplayFor(model => model.CurrentRecieveDate)
-
-                    @Html.ValidationMessageFor(model => model.CurrentRecieveDate, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CurrentLocation, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4 col-lg-4  col-xs-12">
-
-                @Html.DropDownListFor(model => model.CurrentLocationID, ViewBag.CurrentLocationID as List<SelectListItem>, "Select Location", new { htmlAttributes = new { @class = "dropdown" } })
-                @Html.ValidationMessageFor(model => model.CurrentLocationID, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
 
 

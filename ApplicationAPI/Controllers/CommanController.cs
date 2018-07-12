@@ -28,30 +28,40 @@ namespace CylinderAPI.Controllers
             }
             
         }
-        public IEnumerable<string> Get()
+        [HttpPost]
+        public int GetBatchStartEnd(List<BatchStartEnd> batchStartEnd)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                int result = 0;
+                foreach (BatchStartEnd batch in batchStartEnd)
+                {
+                     result = (int)InventoryEntities.usp_tblBatchStartEndInsert(batch.VanBatchNumber, batch.BatchStartDateTime, batch.BatchEndDatetime, batch.ForDate, batch.Sstat, batch.CompanyID, batch.BranchID, batch.UserID).FirstOrDefault();
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+        }
+        [HttpPost]
+        public int GetCylinderInVan(List<CylinderInVan> cylinderInVan)
+        {
+            try
+            {
+                int result=0;
+                foreach (CylinderInVan cylinder in cylinderInVan)
+                {
+                    result = (int)InventoryEntities.usp_tblCylinderInVanInsert(cylinder.vehicleID, cylinder.initialSize, cylinder.remainingsizeforRefill, cylinder.vanBatchNumber, cylinder.VendorName, cylinder.cylinderLoadingDateTime, cylinder.cylinderID, cylinder.cylinderNumber, cylinder.cylinderVendorID, cylinder.cylinderBranchID, cylinder.sstat, cylinder.transactionPoint, cylinder.LocationID, cylinder.TransType, cylinder.CylinderStatus, cylinder.OwnerId, cylinder.vendorBranchID, cylinder.CompanyID, cylinder.BranchID, cylinder.UserID).FirstOrDefault();
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }

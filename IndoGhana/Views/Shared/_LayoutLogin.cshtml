@@ -2,12 +2,11 @@
 
 <html>
 <head>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Scripts/jquery.searchabledropdown-1.0.8.min.js"></script>
     <script src="~/Scripts/comman.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Inventory.css" rel="stylesheet" />
@@ -28,7 +27,7 @@
                 </button>
             </div>
 
-            <div id="navbar-menubuilder" class="navbar-collapse collapse">
+            @*<div id="navbar-menubuilder" class="navbar-collapse collapse">
 
                 <ul class="nav navbar-nav">
                 
@@ -52,7 +51,7 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("User Master", "ListUsers", "UserLogin", new { area = "Login" }, new { })</li>
+                            <li><a href="#">User Details</a></li>
                             <li>@Html.ActionLink("Cylinder Master", "Index", "CylinderDetails", new { area = "CylinderDetails" }, new { })</li>
                             
                             
@@ -67,14 +66,14 @@
                     <li>@Html.ActionLink("Logout", "logout", "Category")</li>
                 </ul>
 
-            </div>
+            </div>*@
 
         </div>
     </div>
 
     @RenderBody()
 
-    @*<div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-bottom " role="navigation">
+    <div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-bottom " role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">Copyrights Reserved</a>
@@ -83,7 +82,7 @@
                     </button>
                 </div>
             </div>
-        </div>*@
+        </div>
 </body>
 
 

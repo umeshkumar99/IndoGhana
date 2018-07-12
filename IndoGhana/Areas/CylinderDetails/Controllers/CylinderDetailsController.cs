@@ -12,18 +12,31 @@ using ZXing;
 
 namespace IndoGhana.Areas.CylinderDetails.Controllers
 {
+  //  [Authorize]
     public class CylinderDetailsController : Controller
     {
+       
+        
         // GET: CylinderDetails/CylinderDetails
         IndoGhanaEntities InventoryEntities = new IndoGhanaEntities();
         public ActionResult Index()
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index", "UserLogin", new { area = "Login" });
+            }
             return View();
         }
         [HttpGet]
 
         public ActionResult GetCylinderList()
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index", "Login", new { area = "Login" });
+            }
             List<usp_CylinderMasterGet_Result> cylinderlist = new List<usp_CylinderMasterGet_Result>();
             try
             {
@@ -185,20 +198,7 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
 
                 usp_tblStatusMasterGetByType_Result result  = InventoryEntities.usp_tblStatusMasterGetByType(8).FirstOrDefault();
                 string sPath = result.statusDesc;
-                //Bitmap bitm = new Bitmap(barcode.Length * 45, 160);
-                //using (Graphics graphic = Graphics.FromImage(bitm))
-                //{
-
-
-                //    Font newfont = new Font("IDAutomationHC39M", 20);
-                //    PointF point = new PointF(2f, 2f);
-                //    SolidBrush black = new SolidBrush(Color.Black);
-                //    SolidBrush white = new SolidBrush(Color.White);
-                //    graphic.FillRectangle(white, 0, 0, bitm.Width, bitm.Height);
-                //    graphic.DrawString("*" + barcode + "*", newfont, black, point);
-
-
-                //}
+               
 
                 using (MemoryStream Mmst = new MemoryStream())
                 {

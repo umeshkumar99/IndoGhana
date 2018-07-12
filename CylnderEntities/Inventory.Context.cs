@@ -505,5 +505,236 @@ namespace CylnderEntities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CylinderMasterInsertUpdate", cylindeNumberParameter, barcodeParameter, manufacturerParameter, purchaseDateParameter, initialGasParameter, wLCapacityParameter, wLCapacityUOMIDParameter, workingPressureParameter, workingPressureUOMIDParameter, testDateParameter, nextTestDateParameter, valveModelParameter, presentStateParameter, gasInUseParameter, ownerParameter, sizeParameter, sizeUOMIDParameter, currentLocationParameter, currentCustomerBranchIDParameter, branchidParameter, companyIDParameter, createdByParameter, updateByParameter, statusParameter);
         }
+    
+        public virtual ObjectResult<string> usp_tblCylinderFillInsert(string cylindeIDs, Nullable<int> createdBy, Nullable<int> branchID, Nullable<int> companyID)
+        {
+            var cylindeIDsParameter = cylindeIDs != null ?
+                new ObjectParameter("cylindeIDs", cylindeIDs) :
+                new ObjectParameter("cylindeIDs", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var branchIDParameter = branchID.HasValue ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(int));
+    
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_tblCylinderFillInsert", cylindeIDsParameter, createdByParameter, branchIDParameter, companyIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> usp_tblCylinderInVanInsert(Nullable<int> vehicleID, Nullable<int> initialSize, Nullable<int> remainingsizeforRefill, string vanBatchNumber, string vendorName, string cylinderLoadingDateTime, Nullable<int> cylinderID, string cylinderNumber, Nullable<int> cylinderVendorID, Nullable<int> cylinderBranchID, Nullable<int> sstat, Nullable<int> transactionPoint, Nullable<int> locationID, Nullable<int> transType, Nullable<int> cylinderStatus, Nullable<int> ownerId, Nullable<int> vendorBranchID, Nullable<int> companyID, Nullable<int> branchID, Nullable<int> userID)
+        {
+            var vehicleIDParameter = vehicleID.HasValue ?
+                new ObjectParameter("vehicleID", vehicleID) :
+                new ObjectParameter("vehicleID", typeof(int));
+    
+            var initialSizeParameter = initialSize.HasValue ?
+                new ObjectParameter("initialSize", initialSize) :
+                new ObjectParameter("initialSize", typeof(int));
+    
+            var remainingsizeforRefillParameter = remainingsizeforRefill.HasValue ?
+                new ObjectParameter("remainingsizeforRefill", remainingsizeforRefill) :
+                new ObjectParameter("remainingsizeforRefill", typeof(int));
+    
+            var vanBatchNumberParameter = vanBatchNumber != null ?
+                new ObjectParameter("vanBatchNumber", vanBatchNumber) :
+                new ObjectParameter("vanBatchNumber", typeof(string));
+    
+            var vendorNameParameter = vendorName != null ?
+                new ObjectParameter("VendorName", vendorName) :
+                new ObjectParameter("VendorName", typeof(string));
+    
+            var cylinderLoadingDateTimeParameter = cylinderLoadingDateTime != null ?
+                new ObjectParameter("cylinderLoadingDateTime", cylinderLoadingDateTime) :
+                new ObjectParameter("cylinderLoadingDateTime", typeof(string));
+    
+            var cylinderIDParameter = cylinderID.HasValue ?
+                new ObjectParameter("cylinderID", cylinderID) :
+                new ObjectParameter("cylinderID", typeof(int));
+    
+            var cylinderNumberParameter = cylinderNumber != null ?
+                new ObjectParameter("cylinderNumber", cylinderNumber) :
+                new ObjectParameter("cylinderNumber", typeof(string));
+    
+            var cylinderVendorIDParameter = cylinderVendorID.HasValue ?
+                new ObjectParameter("cylinderVendorID", cylinderVendorID) :
+                new ObjectParameter("cylinderVendorID", typeof(int));
+    
+            var cylinderBranchIDParameter = cylinderBranchID.HasValue ?
+                new ObjectParameter("cylinderBranchID", cylinderBranchID) :
+                new ObjectParameter("cylinderBranchID", typeof(int));
+    
+            var sstatParameter = sstat.HasValue ?
+                new ObjectParameter("sstat", sstat) :
+                new ObjectParameter("sstat", typeof(int));
+    
+            var transactionPointParameter = transactionPoint.HasValue ?
+                new ObjectParameter("transactionPoint", transactionPoint) :
+                new ObjectParameter("transactionPoint", typeof(int));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var transTypeParameter = transType.HasValue ?
+                new ObjectParameter("TransType", transType) :
+                new ObjectParameter("TransType", typeof(int));
+    
+            var cylinderStatusParameter = cylinderStatus.HasValue ?
+                new ObjectParameter("CylinderStatus", cylinderStatus) :
+                new ObjectParameter("CylinderStatus", typeof(int));
+    
+            var ownerIdParameter = ownerId.HasValue ?
+                new ObjectParameter("OwnerId", ownerId) :
+                new ObjectParameter("OwnerId", typeof(int));
+    
+            var vendorBranchIDParameter = vendorBranchID.HasValue ?
+                new ObjectParameter("vendorBranchID", vendorBranchID) :
+                new ObjectParameter("vendorBranchID", typeof(int));
+    
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            var branchIDParameter = branchID.HasValue ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(int));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_tblCylinderInVanInsert", vehicleIDParameter, initialSizeParameter, remainingsizeforRefillParameter, vanBatchNumberParameter, vendorNameParameter, cylinderLoadingDateTimeParameter, cylinderIDParameter, cylinderNumberParameter, cylinderVendorIDParameter, cylinderBranchIDParameter, sstatParameter, transactionPointParameter, locationIDParameter, transTypeParameter, cylinderStatusParameter, ownerIdParameter, vendorBranchIDParameter, companyIDParameter, branchIDParameter, userIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> usp_tblBatchStartEndInsert(string vanBatchNumber, string batchStartDateTime, string batchEndDatetime, string forDate, Nullable<int> sstat, Nullable<int> companyID, Nullable<int> branchID, Nullable<int> userID)
+        {
+            var vanBatchNumberParameter = vanBatchNumber != null ?
+                new ObjectParameter("VanBatchNumber", vanBatchNumber) :
+                new ObjectParameter("VanBatchNumber", typeof(string));
+    
+            var batchStartDateTimeParameter = batchStartDateTime != null ?
+                new ObjectParameter("BatchStartDateTime", batchStartDateTime) :
+                new ObjectParameter("BatchStartDateTime", typeof(string));
+    
+            var batchEndDatetimeParameter = batchEndDatetime != null ?
+                new ObjectParameter("BatchEndDatetime", batchEndDatetime) :
+                new ObjectParameter("BatchEndDatetime", typeof(string));
+    
+            var forDateParameter = forDate != null ?
+                new ObjectParameter("ForDate", forDate) :
+                new ObjectParameter("ForDate", typeof(string));
+    
+            var sstatParameter = sstat.HasValue ?
+                new ObjectParameter("Sstat", sstat) :
+                new ObjectParameter("Sstat", typeof(int));
+    
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            var branchIDParameter = branchID.HasValue ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(int));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_tblBatchStartEndInsert", vanBatchNumberParameter, batchStartDateTimeParameter, batchEndDatetimeParameter, forDateParameter, sstatParameter, companyIDParameter, branchIDParameter, userIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_tblUserMasterGet_Result> usp_tblUserMasterGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblUserMasterGet_Result>("usp_tblUserMasterGet");
+        }
+    
+        public virtual ObjectResult<usp_tblUserMasterGetByID_Result> usp_tblUserMasterGetByID(Nullable<int> user_Id)
+        {
+            var user_IdParameter = user_Id.HasValue ?
+                new ObjectParameter("User_Id", user_Id) :
+                new ObjectParameter("User_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblUserMasterGetByID_Result>("usp_tblUserMasterGetByID", user_IdParameter);
+        }
+    
+        public virtual ObjectResult<string> usp_tblUserMasterInsertUpdate(Nullable<int> userId, string user_Name, string address, string email, string contact_Number, string iMIE1, string iMIE2, string login_Id, string password, Nullable<int> group_Id, Nullable<int> company_Id, Nullable<System.DateTime> creationDate, Nullable<bool> status, Nullable<int> createdBy, Nullable<int> branch_Id, Nullable<int> versionID)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var user_NameParameter = user_Name != null ?
+                new ObjectParameter("User_Name", user_Name) :
+                new ObjectParameter("User_Name", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var contact_NumberParameter = contact_Number != null ?
+                new ObjectParameter("Contact_Number", contact_Number) :
+                new ObjectParameter("Contact_Number", typeof(string));
+    
+            var iMIE1Parameter = iMIE1 != null ?
+                new ObjectParameter("IMIE1", iMIE1) :
+                new ObjectParameter("IMIE1", typeof(string));
+    
+            var iMIE2Parameter = iMIE2 != null ?
+                new ObjectParameter("IMIE2", iMIE2) :
+                new ObjectParameter("IMIE2", typeof(string));
+    
+            var login_IdParameter = login_Id != null ?
+                new ObjectParameter("Login_Id", login_Id) :
+                new ObjectParameter("Login_Id", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var group_IdParameter = group_Id.HasValue ?
+                new ObjectParameter("Group_Id", group_Id) :
+                new ObjectParameter("Group_Id", typeof(int));
+    
+            var company_IdParameter = company_Id.HasValue ?
+                new ObjectParameter("Company_Id", company_Id) :
+                new ObjectParameter("Company_Id", typeof(int));
+    
+            var creationDateParameter = creationDate.HasValue ?
+                new ObjectParameter("CreationDate", creationDate) :
+                new ObjectParameter("CreationDate", typeof(System.DateTime));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var branch_IdParameter = branch_Id.HasValue ?
+                new ObjectParameter("Branch_Id", branch_Id) :
+                new ObjectParameter("Branch_Id", typeof(int));
+    
+            var versionIDParameter = versionID.HasValue ?
+                new ObjectParameter("VersionID", versionID) :
+                new ObjectParameter("VersionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_tblUserMasterInsertUpdate", userIdParameter, user_NameParameter, addressParameter, emailParameter, contact_NumberParameter, iMIE1Parameter, iMIE2Parameter, login_IdParameter, passwordParameter, group_IdParameter, company_IdParameter, creationDateParameter, statusParameter, createdByParameter, branch_IdParameter, versionIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_tblGroupGet_Result> usp_tblGroupGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblGroupGet_Result>("usp_tblGroupGet");
+        }
     }
 }

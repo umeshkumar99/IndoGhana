@@ -47,9 +47,11 @@ namespace CylnderEntities
         public Nullable<int> GasInUseID { get; set; }
         public string GasInUse { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select the Vendor Name")]
+        [Display(Name = "Owner Name")]
         public Nullable<int> VendorID { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select the Vendor Branch")]
         public Nullable<int> VendorBranchID { get; set; }
+        [Display(Name ="Owner Name")]
         public string VendorName { get; set; }
         public string VendorBranchName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter the size")]

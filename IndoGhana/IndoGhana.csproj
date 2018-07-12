@@ -185,6 +185,8 @@
     <Compile Include="Areas\CylinderTransaction\Controllers\CylinderFillController.cs" />
     <Compile Include="Areas\CylinderTransaction\CylinderTransactionAreaRegistration.cs" />
     <Compile Include="Areas\LoginAdmin\LoginAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Login\Controllers\UserLoginController.cs" />
+    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -204,6 +206,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Inventory.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\the-big-picture.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -226,6 +229,11 @@
     <Content Include="Areas\CylinderDetails\Views\CylinderDetails\Detail.cshtml" />
     <Content Include="Areas\CylinderDetails\Views\CylinderDetails\printbarcode.cshtml" />
     <Content Include="Areas\CylinderDetails\Views\CylinderDetails\CreateCylinderDetails.cshtml" />
+    <Content Include="Areas\Login\Views\web.config" />
+    <Content Include="Areas\Login\Views\UserLogin\Index.cshtml" />
+    <Content Include="Areas\Login\Views\UserLogin\ListUsers.cshtml" />
+    <Content Include="Areas\Login\Views\UserLogin\EditUser.cshtml" />
+    <Content Include="Areas\Login\Views\UserLogin\CreateUserDetails.cshtml" />
     <None Include="Properties\PublishProfiles\indoghanawebapp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\comman.js" />
@@ -233,6 +241,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.searchabledropdown-1.0.8.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -276,6 +285,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,11 +296,14 @@
     <Folder Include="Areas\LoginAdmin\Controllers\" />
     <Folder Include="Areas\LoginAdmin\Models\" />
     <Folder Include="Areas\LoginAdmin\Views\Shared\" />
+    <Folder Include="Areas\Login\Models\" />
+    <Folder Include="Areas\Login\Views\Shared\" />
     <Folder Include="Areas\Masters\Controllers\" />
     <Folder Include="Areas\Masters\Models\" />
     <Folder Include="Areas\Masters\Views\Shared\" />
     <Folder Include="Images\Barcode\" />
     <Folder Include="Images\ClientSignature\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
