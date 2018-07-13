@@ -37,42 +37,7 @@
                     }
                     else
                         $('#validpass').css('display', 'none');
-                //alert('validate');
-                @*debugger;
-                $.ajax(
-                 {
-
-                     url:'@Url.Action("CheckLogin")',
-                     data: { loginID: usrname.value, Password: userpwd.value },
-                     method: 'Post',
-                     dataType: 'json',
-
-                     success: function (data) {
-
-                         debugger;
-                         //alert(data.USer_Name);
-                         if ( data != null) {
-                             debugger;
-
-                             var urltoredirect = "http://" + location.host + "//admin/Category/Index";
-                             //alert(urltoredirect);
-                             //Debug.writeln(urltoredirect.toString());
-                             window.location.assign(urltoredirect);
-                             //window.location = '~/Student/StudentDetails/Index';
-                             //$.post('@Url.Action("GetSudentDetails")');
-                         }
-                         else
-                         {
-                             alert("Wrong username or password. Please try again.");
-                             usrname.focus();
-                         }
-                     },
-                     error: function (err) {
-                         debugger;
-                         alert(err.responseText);
-                     }
-                 });*@
-
+               
             });
 
 
@@ -121,7 +86,7 @@
 
                     {
                         /*   <form class="form-horizontal">*/
-
+                        @Html.ValidationMessage("Error", new { @class = "text-danger" })
                             <div class="form-group">
 
                                 <label for="Input User Name" class="label label-primary">User Name</label>

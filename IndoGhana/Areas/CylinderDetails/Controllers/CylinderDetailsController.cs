@@ -54,6 +54,11 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
         [HttpGet]
         public ActionResult Edit(string cylindernumber)
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index", "Login", new { area = "Login" });
+            }
             usp_CylinderMasterGetByID_Result cylinderDetails = new usp_CylinderMasterGetByID_Result();
             try
             {
@@ -81,6 +86,9 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
             {
                 usp_CylinderMasterGetByID_Result cylinder = new usp_CylinderMasterGetByID_Result();
                 TryUpdateModel(cylinder);
+                USP_GetUserDetails_Result logindetails;
+              
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
                 //bool b= int.TryParse(frm["WLCapacityUOMID"], out re);
                 string barcode = cylinder.CylindeNumber.ToString() + cylinder.VendorID.ToString() + cylinder.VendorBranchID.ToString();
                 object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, barcode, cylinder.ManufacturerID,
@@ -88,7 +96,7 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                     cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
                     cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
                     cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
-                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, cylinder.CurrentCustomerBranchID,1, 1, 1, 1, cylinder.status);
+                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, cylinder.CurrentCustomerBranchID, logindetails.Branch_Id, logindetails.Company_Id, logindetails.USer_Id, logindetails.USer_Id, cylinder.status);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -112,6 +120,11 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
         [HttpGet]
         public ActionResult CreateCylinderDetails()
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index", "UserLogin", new { area = "Login" });
+            }
             FillViewBag();
             return View();
         }
@@ -124,12 +137,15 @@ namespace IndoGhana.Areas.CylinderDetails.Controllers
                 TryUpdateModel(cylinder);
                 //bool b= int.TryParse(frm["WLCapacityUOMID"], out re);
                 string barcode = cylinder.CylindeNumber.ToString() + cylinder.VendorID.ToString() + cylinder.VendorBranchID.ToString();
+                USP_GetUserDetails_Result logindetails;
+
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
                 object result = InventoryEntities.usp_CylinderMasterInsertUpdate(cylinder.CylindeNumber, barcode, cylinder.ManufacturerID,
                     cylinder.PurchaseDate, cylinder.InitialGasID, cylinder.WLCapacity,
                     cylinder.WLCapacityUOMID, cylinder.WorkingPressure, cylinder.WorkingPressureUOMID,
                     cylinder.TestDate, cylinder.NextTestDate, cylinder.ValveModelID,
                     cylinder.PresentStateID, cylinder.GasInUseID, cylinder.VendorBranchID,
-                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, cylinder.CurrentCustomerBranchID,1, 1, 1, 1, cylinder.status);
+                    cylinder.Size, cylinder.SizeUOMID, cylinder.CurrentLocationID, cylinder.CurrentCustomerBranchID, logindetails.Branch_Id, logindetails.Company_Id, logindetails.USer_Id, logindetails.USer_Id, cylinder.status);
                 GenerateBarcode(barcode);
                 return RedirectToAction("Index");
             }

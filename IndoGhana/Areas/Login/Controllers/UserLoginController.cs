@@ -28,6 +28,11 @@ namespace IndoGhana.Areas.Login.Controllers
                 //USP_GetUserDetails_Result logindetails= InventoryEntities.USP_GetUserDetails(login.UserName, login.Password, login.Phone).FirstOrDefault();
                 USP_GetUserDetails_Result logindetails = InventoryEntities.USP_GetUserDetails(username, password, "").FirstOrDefault();
                 // return View();
+                if (logindetails.USer_Id == 0)
+                {
+                    ModelState.AddModelError("Error", "Invalid User name or Password. Please try again.");
+                    return View();
+                }
                 Session["logindetails"] = logindetails;
                 return RedirectToAction("Index", "CylinderDetails", new { area = "CylinderDetails" });
             }
@@ -37,7 +42,13 @@ namespace IndoGhana.Areas.Login.Controllers
             }
         }
         public ActionResult ListUsers()
+
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
             return View();
         }
         public ActionResult ListUsersDetails()
@@ -62,23 +73,78 @@ namespace IndoGhana.Areas.Login.Controllers
         [HttpPost]
         public ActionResult EditUser(FormCollection frm)
         {
-            return RedirectToAction("Index");
+            usp_tblUserMasterGetByID_Result userdetails = new usp_tblUserMasterGetByID_Result();
+            TryUpdateModel(userdetails);
+            USP_GetUserDetails_Result logindetails;
+            //if (Session["logindetails"] != null)
+            //{
+            logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+            // }
+            string result = (string)InventoryEntities.usp_tblUserMasterInsertUpdate(userdetails.User_Id, userdetails.User_Name, userdetails.Address, userdetails.Email,
+                          userdetails.Contact_Number, userdetails.IMIE1, userdetails.IMIE2, userdetails.Login_Id, userdetails.Password, userdetails.Group_Id, logindetails.Company_Id,
+                          DateTime.Now, userdetails.UserStatus, logindetails.USer_Id, userdetails.Branch_Id, 0).FirstOrDefault();
+            return RedirectToAction("ListUsers");
         }
         public ActionResult CreateUserDetails()
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
             FillViewBag();
             return View();
         }
        [HttpPost]
         public ActionResult CreateUserDetails(FormCollection frm)
         {
-            return View();
+            try
+            {
+                usp_tblUserMasterGetByID_Result userdetails = new usp_tblUserMasterGetByID_Result();
+                TryUpdateModel(userdetails);
+                USP_GetUserDetails_Result logindetails;
+                //if (Session["logindetails"] != null)
+                //{
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+                // }
+                string result = (string)InventoryEntities.usp_tblUserMasterInsertUpdate(0, userdetails.User_Name, userdetails.Address, userdetails.Email,
+                              userdetails.Contact_Number, userdetails.IMIE1, userdetails.IMIE2, userdetails.Login_Id, userdetails.Password, userdetails.Group_Id, logindetails.Company_Id,
+                              DateTime.Now, userdetails.UserStatus, logindetails.USer_Id, userdetails.Branch_Id, 0).FirstOrDefault();
+                if (result == "Duplicate user")
+                {
+                    FillViewBag();
+                    ModelState.AddModelError("Error", "User already exists");
+                    //ViewBag.error = "User already exists";
+                    // return Content("Duplicate User");
+                    // return RedirectToAction("CreateUserDetails"); 
+                    return View();
+                }
+                else if(result == "Duplicate mobile")
+                {
+                    FillViewBag();
+                    ModelState.AddModelError("Error", "Mobile No. already exists");
+                    //ViewBag.error = "User already exists";
+                    
+                    return View();
+
+                }
+                    else
+                                    return RedirectToAction("ListUsers");
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("ListUsers");
+            }
+        }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index");
         }
         private void FillViewBag()
         {
             ViewBag.Group_Id = new SelectList(InventoryEntities.usp_tblGroupGet(), "Group_Id", "Group_Name");
             ViewBag.Branch_Id = new SelectList(InventoryEntities.usp_tblCompanyBranchMasterListGet(), "BranchId", "BranchName");
-            
-        }
+            }
         }
     }

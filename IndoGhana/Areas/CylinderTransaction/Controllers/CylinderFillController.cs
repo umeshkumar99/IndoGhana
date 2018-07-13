@@ -14,6 +14,11 @@ namespace IndoGhana.Areas.CylinderTransaction.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index", "UserLogin", new { area = "Login" });
+            }
             return View();
         }
         [HttpPost]
