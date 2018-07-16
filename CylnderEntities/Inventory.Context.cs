@@ -37,21 +37,7 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblStatusMasterGetByType_Result>("usp_tblStatusMasterGetByType", statusTypeIDParameter);
         }
     
-        public virtual ObjectResult<usp_CustomerMasterGet_Result> usp_CustomerMasterGet()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerMasterGet_Result>("usp_CustomerMasterGet");
-        }
-    
-        public virtual ObjectResult<usp_CustomerMasterGetbyID_Result> usp_CustomerMasterGetbyID(Nullable<int> customerID)
-        {
-            var customerIDParameter = customerID.HasValue ?
-                new ObjectParameter("CustomerID", customerID) :
-                new ObjectParameter("CustomerID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerMasterGetbyID_Result>("usp_CustomerMasterGetbyID", customerIDParameter);
-        }
-    
-        public virtual ObjectResult<string> usp_CustomerMasterInsertUpdate(Nullable<int> customerID, string customerName, string customerAddress, string contactPersonName, string contactNumber, Nullable<int> branchID, Nullable<int> companyID, Nullable<System.DateTime> creationDate, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<System.DateTime> updatedOn, Nullable<bool> status)
+        public virtual ObjectResult<string> usp_CustomerMasterInsertUpdate(Nullable<int> customerID, string customerName, string customerAddress, string contactPersonName, string contactNumber, string email, Nullable<int> branchID, Nullable<int> companyID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<System.DateTime> updatedOn, Nullable<bool> status, Nullable<bool> isOwner)
         {
             var customerIDParameter = customerID.HasValue ?
                 new ObjectParameter("CustomerID", customerID) :
@@ -73,6 +59,10 @@ namespace CylnderEntities
                 new ObjectParameter("ContactNumber", contactNumber) :
                 new ObjectParameter("ContactNumber", typeof(string));
     
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
             var branchIDParameter = branchID.HasValue ?
                 new ObjectParameter("BranchID", branchID) :
                 new ObjectParameter("BranchID", typeof(int));
@@ -80,10 +70,6 @@ namespace CylnderEntities
             var companyIDParameter = companyID.HasValue ?
                 new ObjectParameter("CompanyID", companyID) :
                 new ObjectParameter("CompanyID", typeof(int));
-    
-            var creationDateParameter = creationDate.HasValue ?
-                new ObjectParameter("CreationDate", creationDate) :
-                new ObjectParameter("CreationDate", typeof(System.DateTime));
     
             var createdByParameter = createdBy.HasValue ?
                 new ObjectParameter("CreatedBy", createdBy) :
@@ -101,7 +87,11 @@ namespace CylnderEntities
                 new ObjectParameter("status", status) :
                 new ObjectParameter("status", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CustomerMasterInsertUpdate", customerIDParameter, customerNameParameter, customerAddressParameter, contactPersonNameParameter, contactNumberParameter, branchIDParameter, companyIDParameter, creationDateParameter, createdByParameter, updateByParameter, updatedOnParameter, statusParameter);
+            var isOwnerParameter = isOwner.HasValue ?
+                new ObjectParameter("IsOwner", isOwner) :
+                new ObjectParameter("IsOwner", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_CustomerMasterInsertUpdate", customerIDParameter, customerNameParameter, customerAddressParameter, contactPersonNameParameter, contactNumberParameter, emailParameter, branchIDParameter, companyIDParameter, createdByParameter, updateByParameter, updatedOnParameter, statusParameter, isOwnerParameter);
         }
     
         public virtual ObjectResult<usp_CustomerSiteMasterGetbyID_Result> usp_CustomerSiteMasterGetbyID(Nullable<int> customerID)
@@ -740,6 +730,101 @@ namespace CylnderEntities
         public virtual ObjectResult<usp_tblCompanyBranchMasterListGet_Result> usp_tblCompanyBranchMasterListGet()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_tblCompanyBranchMasterListGet_Result>("usp_tblCompanyBranchMasterListGet");
+        }
+    
+        public virtual ObjectResult<string> usp_VendorMasterInsertUpdate(Nullable<int> vendorID, string vendorName, string vendorAddress, string contactPersonName, string contactNumber, string emailID, Nullable<int> companyID, Nullable<int> branchID, Nullable<int> createdBy, Nullable<int> updateBy, Nullable<System.DateTime> updatedOn, Nullable<bool> status)
+        {
+            var vendorIDParameter = vendorID.HasValue ?
+                new ObjectParameter("VendorID", vendorID) :
+                new ObjectParameter("VendorID", typeof(int));
+    
+            var vendorNameParameter = vendorName != null ?
+                new ObjectParameter("VendorName", vendorName) :
+                new ObjectParameter("VendorName", typeof(string));
+    
+            var vendorAddressParameter = vendorAddress != null ?
+                new ObjectParameter("VendorAddress", vendorAddress) :
+                new ObjectParameter("VendorAddress", typeof(string));
+    
+            var contactPersonNameParameter = contactPersonName != null ?
+                new ObjectParameter("ContactPersonName", contactPersonName) :
+                new ObjectParameter("ContactPersonName", typeof(string));
+    
+            var contactNumberParameter = contactNumber != null ?
+                new ObjectParameter("ContactNumber", contactNumber) :
+                new ObjectParameter("ContactNumber", typeof(string));
+    
+            var emailIDParameter = emailID != null ?
+                new ObjectParameter("EmailID", emailID) :
+                new ObjectParameter("EmailID", typeof(string));
+    
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            var branchIDParameter = branchID.HasValue ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(int));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updateByParameter = updateBy.HasValue ?
+                new ObjectParameter("UpdateBy", updateBy) :
+                new ObjectParameter("UpdateBy", typeof(int));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_VendorMasterInsertUpdate", vendorIDParameter, vendorNameParameter, vendorAddressParameter, contactPersonNameParameter, contactNumberParameter, emailIDParameter, companyIDParameter, branchIDParameter, createdByParameter, updateByParameter, updatedOnParameter, statusParameter);
+        }
+    
+        public virtual ObjectResult<usp_CustomerMasterGet_Result> usp_CustomerMasterGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerMasterGet_Result>("usp_CustomerMasterGet");
+        }
+    
+        public virtual ObjectResult<usp_CustomerMasterGetbyID_Result> usp_CustomerMasterGetbyID(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerMasterGetbyID_Result>("usp_CustomerMasterGetbyID", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_VendorBranchMasterGet_Result> usp_VendorBranchMasterGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchMasterGet_Result>("usp_VendorBranchMasterGet");
+        }
+    
+        public virtual ObjectResult<usp_VendorBranchMasterGetbyID_Result> usp_VendorBranchMasterGetbyID(Nullable<int> vendorBranchID)
+        {
+            var vendorBranchIDParameter = vendorBranchID.HasValue ?
+                new ObjectParameter("VendorBranchID", vendorBranchID) :
+                new ObjectParameter("VendorBranchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchMasterGetbyID_Result>("usp_VendorBranchMasterGetbyID", vendorBranchIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_VendorMasterGet_Result> usp_VendorMasterGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorMasterGet_Result>("usp_VendorMasterGet");
+        }
+    
+        public virtual ObjectResult<usp_VendorMasterGetbyID_Result> usp_VendorMasterGetbyID(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorMasterGetbyID_Result>("usp_VendorMasterGetbyID", customerIDParameter);
         }
     }
 }

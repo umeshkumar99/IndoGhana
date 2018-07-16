@@ -18,6 +18,8 @@ namespace CylnderEntities
         public string CustomerAddress { get; set; }
         public string ContactPersonName { get; set; }
         public string ContactNumber { get; set; }
+        public string Email { get; set; }
+        public Nullable<bool> IsOwner { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<int> CreatedByID { get; set; }
         public string CreatedBy { get; set; }

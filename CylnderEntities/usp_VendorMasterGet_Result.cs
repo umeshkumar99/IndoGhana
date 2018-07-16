@@ -11,15 +11,14 @@ namespace CylnderEntities
 {
     using System;
     
-    public partial class usp_CustomerMasterGet_Result
+    public partial class usp_VendorMasterGet_Result
     {
-        public int CustomerID { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerAddress { get; set; }
+        public int VendorID { get; set; }
+        public string VendorName { get; set; }
+        public string VendorAddress { get; set; }
         public string ContactPersonName { get; set; }
         public string ContactNumber { get; set; }
-        public string Email { get; set; }
-        public Nullable<bool> IsOwner { get; set; }
+        public string EmailID { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<int> CreatedByID { get; set; }
         public string CreatedBy { get; set; }

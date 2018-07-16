@@ -187,6 +187,7 @@
     <Compile Include="Areas\LoginAdmin\LoginAdminAreaRegistration.cs" />
     <Compile Include="Areas\Login\Controllers\UserLoginController.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
+    <Compile Include="Areas\Masters\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -212,10 +213,20 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\200.gif" />
+    <Content Include="Images\back_disabled.jpg" />
+    <Content Include="Images\back_enabled.jpg" />
+    <Content Include="Images\details_close.png" />
+    <Content Include="Images\details_open.png" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\forward_disabled.jpg" />
+    <Content Include="Images\forward_enabled.jpg" />
     <Content Include="Images\print.png" />
     <Content Include="Images\processing.gif" />
     <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
     <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\CylinderDetails\Views\web.config" />
@@ -234,6 +245,10 @@
     <Content Include="Areas\Login\Views\UserLogin\ListUsers.cshtml" />
     <Content Include="Areas\Login\Views\UserLogin\EditUser.cshtml" />
     <Content Include="Areas\Login\Views\UserLogin\CreateUserDetails.cshtml" />
+    <Content Include="Areas\Masters\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Masters\Views\Customer\CreateCustomerDetails.cshtml" />
+    <Content Include="Areas\Masters\Views\Customer\CreateCustomerSiteDetails.cshtml" />
+    <Content Include="Images\Sorting icons.psd" />
     <None Include="Properties\PublishProfiles\indoghanawebapp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\comman.js" />
@@ -298,7 +313,6 @@
     <Folder Include="Areas\LoginAdmin\Views\Shared\" />
     <Folder Include="Areas\Login\Models\" />
     <Folder Include="Areas\Login\Views\Shared\" />
-    <Folder Include="Areas\Masters\Controllers\" />
     <Folder Include="Areas\Masters\Models\" />
     <Folder Include="Areas\Masters\Views\Shared\" />
     <Folder Include="Images\Barcode\" />
