@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Models\BatchStartEnd.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerSiteMaster.cs" />
     <Compile Include="Models\CylinderInVan.cs" />
     <Compile Include="Models\Cylinders.cs" />
     <Compile Include="Models\Login.cs" />
@@ -138,6 +139,9 @@
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_CustomerSiteListGet_Result.cs">
+      <DependentUpon>Inventory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_CustomerSiteMasterGetbyIDDetails_Result.cs">
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_CustomerSiteMasterGetbyID_Result.cs">

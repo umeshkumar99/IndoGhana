@@ -45,7 +45,7 @@ namespace CylnderEntities
         public string PresentState { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select the Present State")]
         public Nullable<int> GasInUseID { get; set; }
-        public string GasInUse { get; set; }
+        public string GasInUse { get; set; }    
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select the Vendor Name")]
         [Display(Name = "Owner Name")]
         public Nullable<int> VendorID { get; set; }

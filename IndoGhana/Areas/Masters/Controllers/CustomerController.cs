@@ -79,21 +79,14 @@ namespace IndoGhana.Areas.Masters.Controllers
             // }
             string result = (string)InventoryEntities.usp_CustomerMasterInsertUpdate(0, customerdetails.CustomerName, customerdetails.CustomerAddress, customerdetails.ContactPersonName, customerdetails.ContactNumber
                 , customerdetails.Email, logindetails.Branch_Id, logindetails.Company_Id, logindetails.USer_Id, 0, DateTime.Now, customerdetails.status, customerdetails.IsOwner).FirstOrDefault();
-            if (result == "Duplicate")
+            if (result == "Duplicate customer")
             {
 
                 ModelState.AddModelError("Error", "Customer already exists");
 
                 return View();
             }
-            else if (result == "Duplicate mobile")
-            {
-
-                ModelState.AddModelError("Error", "Mobile No. already exists");
-
-
-                return View();
-            }
+          
             else
             {
                 return RedirectToAction("Index");
@@ -120,18 +113,122 @@ namespace IndoGhana.Areas.Masters.Controllers
         [HttpPost]
         public ActionResult CreateCustomerSiteDetails(FormCollection frm)
         {
-            try
+            if (Session["logindetails"] == null)
             {
-                //test
+                Session.Abandon();
                 return RedirectToAction("Index");
             }
+            try
+            {
+                USP_GetUserDetails_Result logindetails;
+                //if (Session["logindetails"] != null)
+                //{
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+                usp_CustomerSiteMasterGetbyID_Result customerdetails = new usp_CustomerSiteMasterGetbyID_Result();
+                TryUpdateModel(customerdetails);
 
-            
+                string result = (string)InventoryEntities.usp_CustomerMasterSiteInsertUpdate(customerdetails.CustomerID, customerdetails.CustomerIDSiteID, customerdetails.SiteName, customerdetails.SiteAddress, customerdetails.ContactPersonName, customerdetails.ContactNumber
+                , customerdetails.Email, logindetails.USer_Id, logindetails.USer_Id, DateTime.Now, customerdetails.status).FirstOrDefault();
+                if (result == "Duplicate Customer Site")
+                {
+
+                    ModelState.AddModelError("Error", "Customer site already exists");
+
+                    return View();
+                }
+
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             catch (Exception ex)
             {
                 return RedirectToAction("Index");
             }
+
         }
+
+        public ActionResult EditCustomerDetails(int id)
+        {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
+           // FillViewBag();
+            usp_CustomerMasterGetbyID_Result customerdetails = InventoryEntities.usp_CustomerMasterGetbyID(id).FirstOrDefault();
+            return View(customerdetails);
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomerDetails()
+        {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
+            try
+            {
+                USP_GetUserDetails_Result logindetails;
+                //if (Session["logindetails"] != null)
+                //{
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+                usp_CustomerMasterGetbyID_Result customerdetails = new usp_CustomerMasterGetbyID_Result();
+                TryUpdateModel(customerdetails);
+                
+                string result = (string)InventoryEntities.usp_CustomerMasterInsertUpdate(customerdetails.CustomerID, customerdetails.CustomerName, customerdetails.CustomerAddress, customerdetails.ContactPersonName, customerdetails.ContactNumber
+                , customerdetails.Email, logindetails.Branch_Id, logindetails.Company_Id, 0, logindetails.USer_Id, DateTime.Now, customerdetails.status, customerdetails.IsOwner).FirstOrDefault();
+                return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        public ActionResult EditCustomerSiteDetails(int id)
+        {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
+             FillViewBag();
+            usp_CustomerSiteMasterGetbyIDDetails_Result customerSitedetails = InventoryEntities.usp_CustomerSiteMasterGetbyIDDetails(id).FirstOrDefault();
+            return View(customerSitedetails);
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomerSiteDetails()
+        {
+            if (Session["logindetails"] == null)
+            {
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
+            try
+            {
+                USP_GetUserDetails_Result logindetails;
+                //if (Session["logindetails"] != null)
+                //{
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+                usp_CustomerSiteMasterGetbyID_Result customerdetails = new usp_CustomerSiteMasterGetbyID_Result();
+                TryUpdateModel(customerdetails);
+
+                string result = (string)InventoryEntities.usp_CustomerMasterSiteInsertUpdate(customerdetails.CustomerID, customerdetails.CustomerIDSiteID,customerdetails.SiteName, customerdetails.SiteAddress, customerdetails.ContactPersonName, customerdetails.ContactNumber
+                , customerdetails.Email, logindetails.USer_Id, logindetails.USer_Id,  DateTime.Now, customerdetails.status).FirstOrDefault();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+
 
         private void FillViewBag()
         {

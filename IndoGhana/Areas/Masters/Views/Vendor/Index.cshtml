@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "CustomerList";
+    ViewBag.Title = "VendorList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -24,7 +24,7 @@
         
         }
 
-        function loadcustomersitedata(celldata)
+        function loadVendorsitedata(celldata)
         {
             debugger;
           //  alert(celldata);
@@ -34,7 +34,7 @@
             $.ajax(
           {
 
-              url: '@Url.Action("CustomerSiteList")',
+              url: '@Url.Action("VendorSiteList")',
               data: { id: celldata },
               method: 'Get',
               dataType: 'json',
@@ -53,15 +53,15 @@
 
 
                           {
-                              'data': 'CustomerIDSiteID',
+                              'data': 'VendorIDSiteID',
                               'searchable': true,
                               'sortable': true,
-                              'render': function (CustomerIDSiteID) {
-                                  if (CustomerIDSiteID != '') {
+                              'render': function (VendorIDSiteID) {
+                                  if (VendorIDSiteID != '') {
                                       //document.write(location.href+"<br/>");
-                                      var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/EditUser?User_Id=" + CustomerIDSiteID;
+                                      var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/EditUser?User_Id=" + VendorIDSiteID;
                                       //document.write("urltoredirect=" + urltoredirect);
-                                      return '<a href=' + '@Url.Action("EditCustomerSiteDetails")' + '?id=' + CustomerIDSiteID + '>' + CustomerIDSiteID + '</a>'
+                                      return '<a href=' + '@Url.Action("EditVendorSiteDetails")' + '?id=' + VendorIDSiteID + '>' + VendorIDSiteID + '</a>'
                                   }
                               }
                           },
@@ -130,13 +130,13 @@
 
         }
       
-        function loaddatacustomer()
+        function loaddataVendor()
         {
 
             $.ajax(
            {
 
-               url: '@Url.Action("CustomerList")',
+               url: '@Url.Action("VendorList")',
 
                method: 'Get',
                dataType: 'json',
@@ -152,28 +152,28 @@
                        'scrolly': 200,
                        columns:
                        [
-                           //{'data': 'CustomerID'},
+                           //{'data': 'VendorID'},
 
                            {
-                               'data': 'CustomerID',
+                               'data': 'VendorID',
                                'searchable': true,
                                'sortable': true,
-                               'render': function (CustomerID) {
-                                   if (CustomerID != '') {
+                               'render': function (VendorID) {
+                                   if (VendorID != '') {
                                        //document.write(location.href+"<br/>");
-                                       var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/EditUser?User_Id=" + CustomerID;
+                                       var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/EditUser?User_Id=" + VendorID;
                                        //document.write("urltoredirect=" + urltoredirect);
-                                       return '<a href=' + '@Url.Action("EditCustomerDetails")' + '?id=' + CustomerID + '>' + CustomerID + '</a>'
+                                       return '<a href=' + '@Url.Action("EditVendorDetails")' + '?id=' + VendorID + '>' + VendorID + '</a>'
                                    }
                                }
                            },
-                            { 'data': 'CustomerName' },
-                             { 'data': 'CustomerAddress' },
+                            { 'data': 'VendorName' },
+                             { 'data': 'VendorAddress' },
                             { 'data': 'ContactPersonName' },
 
                               { 'data': 'ContactNumber' },
                                  { 'data': 'Email' },
-                                    { 'data': 'IsOwner' },
+                                   
                                        { 'data': 'CreatedBy' },
                                            {
                                                'data': 'CreationDate'
@@ -242,7 +242,7 @@
                    //    //var nTr = this.parentNode.parentNode;
                    //    // alert(nTr);
                    //    //DeleteRows();;
-                   //    //loadcustomersitedata(celldata);
+                   //    //loadVendorsitedata(celldata);
 
                    //});
 
@@ -252,7 +252,7 @@
                        //var txt = $(this).closest('td').text();
                        var id = $(this).index();
                        if ($(this).index() == 0) {
-                           loadcustomersitedata($(this).closest('td').text());
+                           loadVendorsitedata($(this).closest('td').text());
                        }
                        //alert($(this).closest('td').text());
 
@@ -262,7 +262,7 @@
 //                       var nTr = this.parentNode.parentNode;
                       // alert(nTr);
                        //DeleteRows();;
-                       //loadcustomersitedata(celldata);
+                       //loadVendorsitedata(celldata);
 
                    });
 
@@ -276,7 +276,7 @@
   )
         }
 
-        loaddatacustomer();
+        loaddataVendor();
     });
 
 </script>
@@ -287,8 +287,8 @@
     <div class="container" style="margin-top:50px;">
         <div class="row">
             <div class="col-md-10 col-lg-10  col-xs-12">
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4>Customer List</h4></div>
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Customer", "CreateCustomerDetails") </h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4>Vendor List</h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Vendor", "CreateVendorDetails") </h4></div>
 
             </div>
         </div>
@@ -299,14 +299,14 @@
                     <table id="Prodtbl" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                @*<th>CustomerSiteID</th>*@
-                                <th>CustomerID</th>
-                                <th>CustomerName</th>
-                                <th>CustomerAddress</th>
+                                @*<th>VendorSiteID</th>*@
+                                <th>VendorID</th>
+                                <th>VendorName</th>
+                                <th>VendorAddress</th>
                                 <th>ContactPersonName</th>
                                 <th>ContactNumber</th>
                                 <th>Email</th>
-                                <th>IsOwner</th>
+                                
                                 <th>CreatedBy</th>
                                 <th>CreationDate</th>
                                 
@@ -325,8 +325,8 @@
 
         <div class="row">
             <div class="col-md-10  col-lg-10 col-xs-12">
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4>Customer Site List</h4></div>
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Customer Site", "CreateCustomerSiteDetails") </h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4>Vendor Branch List</h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Vendor Branch", "CreateVendorSiteDetails") </h4></div>
 
             </div>
         </div>
@@ -337,7 +337,7 @@
                     <table id="tblsitelist" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>CustomerSiteID</th>
+                                <th>VendorBranchID</th>
                                 <th>SiteName</th>
                                 <th>SiteAddress</th>
                                 <th>ContactPersonName</th>
