@@ -13,6 +13,8 @@ namespace CylnderEntities
     
     public partial class usp_VendorBranchMasterGetbyID_Result
     {
+        public int VendorID { get; set; }
+        public string VendorName { get; set; }
         public int VendorBranchID { get; set; }
         public string VendorBranchName { get; set; }
         public string VendorBranchAddress { get; set; }

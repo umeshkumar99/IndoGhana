@@ -214,7 +214,9 @@
         <Function Name="usp_VendorBranchListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VendorID" Type="int" Mode="In" />
         </Function>
-        <Function Name="usp_VendorBranchMasterGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_VendorBranchMasterGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VendorID" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_VendorBranchMasterGetbyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VendorBranchID" Type="int" Mode="In" />
         </Function>
@@ -464,10 +466,6 @@
           <FunctionImport Name="usp_CustomerMasterGetbyID" ReturnType="Collection(IndoGhanaModel.usp_CustomerMasterGetbyID_Result)">
           <Parameter Name="CustomerID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="usp_VendorBranchMasterGet" ReturnType="Collection(IndoGhanaModel.usp_VendorBranchMasterGet_Result)" />
-          <FunctionImport Name="usp_VendorBranchMasterGetbyID" ReturnType="Collection(IndoGhanaModel.usp_VendorBranchMasterGetbyID_Result)">
-          <Parameter Name="VendorBranchID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="usp_VendorMasterGet" ReturnType="Collection(IndoGhanaModel.usp_VendorMasterGet_Result)" />
           <FunctionImport Name="usp_VendorMasterGetbyID" ReturnType="Collection(IndoGhanaModel.usp_VendorMasterGetbyID_Result)">
           <Parameter Name="CustomerID" Mode="In" Type="Int32" />
@@ -500,6 +498,12 @@
             <Parameter Name="UpdateBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="status" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_VendorBranchMasterGetbyID" ReturnType="Collection(IndoGhanaModel.usp_VendorBranchMasterGetbyID_Result)">
+          <Parameter Name="VendorBranchID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_VendorBranchMasterGet" ReturnType="Collection(IndoGhanaModel.usp_VendorBranchMasterGet_Result)">
+            <Parameter Name="VendorID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_tblStatusMasterGetByType_Result">
@@ -916,36 +920,6 @@
           <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="status" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="usp_VendorBranchMasterGet_Result">
-          <Property Type="Int32" Name="VendorBranchID" Nullable="false" />
-          <Property Type="String" Name="VendorBranchName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="VendorBranchAddress" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ContactPersonName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="CreatedByID" Nullable="true" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="UpdatedbyID" Nullable="true" />
-          <Property Type="String" Name="Updatedby" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="status" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="usp_VendorBranchMasterGetbyID_Result">
-          <Property Type="Int32" Name="VendorBranchID" Nullable="false" />
-          <Property Type="String" Name="VendorBranchName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="VendorBranchAddress" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ContactPersonName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="CreatedByID" Nullable="true" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="UpdatedbyID" Nullable="true" />
-          <Property Type="String" Name="Updatedby" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="status" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="usp_VendorMasterGet_Result">
           <Property Type="Int32" Name="VendorID" Nullable="false" />
           <Property Type="String" Name="VendorName" Nullable="true" MaxLength="100" />
@@ -990,6 +964,40 @@
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="UpdateByID" Nullable="true" />
           <Property Type="String" Name="UpdateBy" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_VendorBranchMasterGetbyID_Result">
+          <Property Type="Int32" Name="VendorID" Nullable="false" />
+          <Property Type="String" Name="VendorName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="VendorBranchID" Nullable="false" />
+          <Property Type="String" Name="VendorBranchName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VendorBranchAddress" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ContactPersonName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedByID" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="UpdatedbyID" Nullable="true" />
+          <Property Type="String" Name="Updatedby" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_VendorBranchMasterGet_Result">
+          <Property Type="Int32" Name="VendorID" Nullable="false" />
+          <Property Type="String" Name="VendorName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="VendorBranchID" Nullable="false" />
+          <Property Type="String" Name="VendorBranchName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VendorBranchAddress" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ContactPersonName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedByID" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="UpdatedbyID" Nullable="true" />
+          <Property Type="String" Name="Updatedby" Nullable="true" MaxLength="100" />
           <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="status" Nullable="true" />
         </ComplexType>
@@ -1523,44 +1531,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_VendorBranchMasterGet" FunctionName="IndoGhanaModel.Store.usp_VendorBranchMasterGet">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorBranchMasterGet_Result">
-                <ScalarProperty Name="VendorBranchID" ColumnName="VendorBranchID" />
-                <ScalarProperty Name="VendorBranchName" ColumnName="VendorBranchName" />
-                <ScalarProperty Name="VendorBranchAddress" ColumnName="VendorBranchAddress" />
-                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
-                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedbyID" ColumnName="UpdatedbyID" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_VendorBranchMasterGetbyID" FunctionName="IndoGhanaModel.Store.usp_VendorBranchMasterGetbyID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorBranchMasterGetbyID_Result">
-                <ScalarProperty Name="VendorBranchID" ColumnName="VendorBranchID" />
-                <ScalarProperty Name="VendorBranchName" ColumnName="VendorBranchName" />
-                <ScalarProperty Name="VendorBranchAddress" ColumnName="VendorBranchAddress" />
-                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
-                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedbyID" ColumnName="UpdatedbyID" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_VendorMasterGet" FunctionName="IndoGhanaModel.Store.usp_VendorMasterGet">
             <ResultMapping>
               <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorMasterGet_Result">
@@ -1622,6 +1592,48 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_VendorMasterBranchInsertUpdate" FunctionName="IndoGhanaModel.Store.usp_VendorMasterBranchInsertUpdate" />
+          <FunctionImportMapping FunctionImportName="usp_VendorBranchMasterGetbyID" FunctionName="IndoGhanaModel.Store.usp_VendorBranchMasterGetbyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorBranchMasterGetbyID_Result">
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorBranchID" ColumnName="VendorBranchID" />
+                <ScalarProperty Name="VendorBranchName" ColumnName="VendorBranchName" />
+                <ScalarProperty Name="VendorBranchAddress" ColumnName="VendorBranchAddress" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedbyID" ColumnName="UpdatedbyID" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_VendorBranchMasterGet" FunctionName="IndoGhanaModel.Store.usp_VendorBranchMasterGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IndoGhanaModel.usp_VendorBranchMasterGet_Result">
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorBranchID" ColumnName="VendorBranchID" />
+                <ScalarProperty Name="VendorBranchName" ColumnName="VendorBranchName" />
+                <ScalarProperty Name="VendorBranchAddress" ColumnName="VendorBranchAddress" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedbyID" ColumnName="UpdatedbyID" />
+                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

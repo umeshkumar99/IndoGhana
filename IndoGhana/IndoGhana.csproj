@@ -253,7 +253,7 @@
     <Content Include="Areas\Masters\Views\Customer\EditCustomerDetails.cshtml" />
     <Content Include="Areas\Masters\Views\Customer\EditCustomerSiteDetails.cshtml" />
     <Content Include="Areas\Masters\Views\Vendor\CreateVendorDetails.cshtml" />
-    <Content Include="Areas\Masters\Views\Vendor\CreateVendorSiteDetails.cshtml" />
+    <Content Include="Areas\Masters\Views\Vendor\CreateVendorBranchDetails.cshtml" />
     <Content Include="Areas\Masters\Views\Vendor\EditVendorDetails.cshtml" />
     <Content Include="Areas\Masters\Views\Vendor\EditVendorSiteDetails.cshtml" />
     <Content Include="Areas\Masters\Views\Vendor\Index.cshtml" />

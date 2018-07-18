@@ -49,7 +49,7 @@ namespace IndoGhana.Areas.Masters.Controllers
             try
             {
 
-                List<usp_VendorSiteMasterGetbyID_Result> siteList = InventoryEntities.usp_VendorSiteMasterGetbyID(id).ToList();
+                List<usp_VendorBranchMasterGet_Result> siteList = InventoryEntities.usp_VendorBranchMasterGet(id).ToList();
                 return Json(siteList, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -72,6 +72,7 @@ namespace IndoGhana.Areas.Masters.Controllers
         {
             try
             {
+
                 usp_VendorMasterGetbyID_Result Vendordetails = new usp_VendorMasterGetbyID_Result();
                 TryUpdateModel(Vendordetails);
                 USP_GetUserDetails_Result logindetails;
@@ -79,8 +80,10 @@ namespace IndoGhana.Areas.Masters.Controllers
                 //{
                 logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
                 // }
-                string result = (string)InventoryEntities.usp_VendorMasterInsertUpdate(0, Vendordetails.VendorName, Vendordetails.VendorAddress, Vendordetails.ContactPersonName, Vendordetails.ContactNumber
-                    , Vendordetails.Email, logindetails.Branch_Id, logindetails.Company_Id, logindetails.USer_Id, 0, DateTime.Now, Vendordetails.status, Vendordetails.IsOwner).FirstOrDefault();
+                string result = (string)InventoryEntities.usp_VendorMasterInsertUpdate(0, Vendordetails.VendorName, Vendordetails.VendorAddress, 
+                    Vendordetails.ContactPersonName, Vendordetails.ContactNumber
+                    , Vendordetails.EmailID, logindetails.Company_Id, logindetails.Branch_Id,  logindetails.USer_Id, 0, DateTime.Now, Vendordetails.status
+                    ).FirstOrDefault();
                 if (result == "Duplicate Vendor")
                 {
 
@@ -102,7 +105,7 @@ namespace IndoGhana.Areas.Masters.Controllers
 
 
 
-        public ActionResult CreateVendorSiteDetails()
+        public ActionResult CreateVendorBranchDetails()
         {
             if (Session["logindetails"] == null)
             {
@@ -129,13 +132,14 @@ namespace IndoGhana.Areas.Masters.Controllers
                 usp_VendorBranchMasterGetbyID_Result vendorBranch= new usp_VendorBranchMasterGetbyID_Result();
                 TryUpdateModel(vendorBranch);
 
-                string result = (string)InventoryEntities.usp_VendorMasterBranchInsertUpdate(Vendordetails.VendorID, vendorBranch.VendorIDSiteID, vendorBranch.SiteName, vendorBranch.SiteAddress, vendorBranch.ContactPersonName, vendorBranch.ContactNumber
-                , vendorBranch.Email, logindetails.USer_Id, logindetails.USer_Id, DateTime.Now, vendorBranch.status).FirstOrDefault();
+                string result = (string)InventoryEntities.usp_VendorMasterBranchInsertUpdate(vendorBranch.VendorID, vendorBranch.VendorBranchID, vendorBranch.VendorBranchName, vendorBranch.VendorBranchAddress, 
+                    vendorBranch.ContactPersonName, vendorBranch.ContactNumber
+                , vendorBranch.EmailID, 0, logindetails.USer_Id, DateTime.Now, vendorBranch.status).FirstOrDefault();
                 if (result == "Duplicate Vendor Branch")
                 {
 
                     ModelState.AddModelError("Error", "Owner Branch already exists");
-
+                    FillViewBag();
                     return View();
                 }
 
@@ -199,7 +203,7 @@ namespace IndoGhana.Areas.Masters.Controllers
                 return RedirectToAction("Index");
             }
             FillViewBag();
-            usp_VendorSiteMasterGetbyIDDetails_Result VendorSitedetails = InventoryEntities.usp_VendorSiteMasterGetbyIDDetails(id).FirstOrDefault();
+            usp_VendorBranchMasterGetbyID_Result VendorSitedetails = InventoryEntities.usp_VendorBranchMasterGetbyID(id).FirstOrDefault();
             return View(VendorSitedetails);
         }
 
@@ -220,8 +224,9 @@ namespace IndoGhana.Areas.Masters.Controllers
                 usp_VendorBranchMasterGetbyID_Result Vendordetails = new usp_VendorBranchMasterGetbyID_Result();
                 TryUpdateModel(Vendordetails);
 
-                string result = (string)InventoryEntities.usp_VendorMasterBranchInsertUpdate(Vendordetails., Vendordetails.VendorIDSiteID, Vendordetails.SiteName, Vendordetails.SiteAddress, Vendordetails.ContactPersonName, Vendordetails.ContactNumber
-                , Vendordetails.Email, logindetails.USer_Id, logindetails.USer_Id, DateTime.Now, Vendordetails.status).FirstOrDefault();
+                string result = (string)InventoryEntities.usp_VendorMasterBranchInsertUpdate(Vendordetails.VendorID, Vendordetails.VendorBranchID, 
+                    Vendordetails.VendorBranchName, Vendordetails.VendorBranchAddress, Vendordetails.ContactPersonName, Vendordetails.ContactNumber
+                , Vendordetails.EmailID, logindetails.USer_Id, logindetails.USer_Id, DateTime.Now, Vendordetails.status).FirstOrDefault();
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

@@ -42,7 +42,7 @@
               success: function (data) {
                   debugger;
                   var datatableinstance = $('#tblsitelist').DataTable({
-
+                      
                       data: data,
                       'paging': true,
                       'sort': true,
@@ -53,24 +53,25 @@
 
 
                           {
-                              'data': 'VendorIDSiteID',
+                              'data': 'VendorBranchID',
                               'searchable': true,
                               'sortable': true,
-                              'render': function (VendorIDSiteID) {
-                                  if (VendorIDSiteID != '') {
+                              'render': function (VendorBranchID) {
+                                  if (VendorBranchID != '') {
                                       //document.write(location.href+"<br/>");
-                                      var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/EditUser?User_Id=" + VendorIDSiteID;
+                                      var urltoredirect = window.location.protocol + "//" + location.host + window.location.pathname + "/EditUser?User_Id=" + VendorBranchID;
                                       //document.write("urltoredirect=" + urltoredirect);
-                                      return '<a href=' + '@Url.Action("EditVendorSiteDetails")' + '?id=' + VendorIDSiteID + '>' + VendorIDSiteID + '</a>'
+                                      return '<a href=' + '@Url.Action("EditVendorSiteDetails")' + '?id=' + VendorBranchID + '>' + VendorBranchID + '</a>'
                                   }
                               }
                           },
-                           { 'data': 'SiteName' },
-                            { 'data': 'SiteAddress' },
+                          {'data':'VendorName'},
+                           { 'data': 'VendorBranchName' },
+                            { 'data': 'VendorBranchAddress' },
                            { 'data': 'ContactPersonName' },
 
                              { 'data': 'ContactNumber' },
-                                { 'data': 'Email' },
+                                { 'data': 'EmailID' },
                                    
                                       { 'data': 'CreatedBy' },
                                           {
@@ -92,13 +93,12 @@
                                           },
 
                          {
-                             'data': 'Updatedby'
-                              ,
+                             'data': 'UpdatedOn' ,
                              'searchable': true,
                              'sortable': true,
-                             'render': function (Updatedby) {
-                                 if (Updatedby != '' && Updatedby != null) {
-                                     var date = new Date(parseInt(Updatedby.substr(6)));
+                             'render': function (UpdatedOn) {
+                                 if (UpdatedOn != '' && UpdatedOn != null) {
+                                     var date = new Date(parseInt(UpdatedOn.substr(6)));
                                      var month = date.getMonth() + 1;
                                      return date.getDate() + "/" + month + "/" + date.getFullYear();
 
@@ -108,7 +108,7 @@
                              }
 
                          },
-                         { 'data': 'UpdatedOn' },
+                         { 'data': 'Updatedby' },
                            { 'data': 'status' }
 
 
@@ -172,7 +172,7 @@
                             { 'data': 'ContactPersonName' },
 
                               { 'data': 'ContactNumber' },
-                                 { 'data': 'Email' },
+                                 { 'data': 'EmailID' },
                                    
                                        { 'data': 'CreatedBy' },
                                            {
@@ -194,13 +194,13 @@
                                            },
 
                           {
-                              'data': 'Updatedby'
+                              'data': 'UpdatedOn'
                                ,
                               'searchable': true,
                               'sortable': true,
-                              'render': function (Updatedby) {
-                                  if (Updatedby != '' && Updatedby != null) {
-                                      var date = new Date(parseInt(Updatedby.substr(6)));
+                              'render': function (UpdatedOn) {
+                                  if (UpdatedOn != '' && UpdatedOn != null) {
+                                      var date = new Date(parseInt(UpdatedOn.substr(6)));
                                       var month = date.getMonth() + 1;
                                       return date.getDate() + "/" + month + "/" + date.getFullYear();
 
@@ -210,7 +210,8 @@
                               }
 
                           },
-                          { 'data': 'UpdatedOn' },
+                          
+                          { 'data': 'Updatedby' },
                             { 'data': 'status' }
 
 
@@ -219,33 +220,7 @@
                        ]
                    });
 
-                  // var table = $('#Prodtbl').DataTable();
-
-                   //datatableinstance.on('select', function (e, dt, type, indexes) {
-                   //    debugger;
-                   //    if (type === 'row') {
-                           
-                   //        var data = table.rows(indexes).data().pluck('id');
-                   //        alert(data);
-                   //        // do something with the ID of the selected items
-                   //    }
-                   //});
-
-                   //$('#Prodtbl tbody tr').click(function () {
-                   //    var id = $(this).index();
-                   //    //alert("row" + id);
-                   //    var txt = $(this).closest('tr').children('td').text();
-                   //    //alert(txt);
-                   //    //var txt = $('#Prodtbl tbody tr td').closest("td").text();
-                   //    //var title = $('#Prodtbl tbody tr td').eq($(this).index()).text();
-                   //    //alert("cell data:" + title);
-                   //    //var nTr = this.parentNode.parentNode;
-                   //    // alert(nTr);
-                   //    //DeleteRows();;
-                   //    //loadVendorsitedata(celldata);
-
-                   //});
-
+                  
                    $('#Prodtbl tbody td').click(function () {
                        //var id = $(this).index();
                        //alert("td=" + id);
@@ -288,7 +263,7 @@
         <div class="row">
             <div class="col-md-10 col-lg-10  col-xs-12">
                 <div class="col-md-5 col-lg-5 col-xs-6"><h4>Vendor List</h4></div>
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Vendor", "CreateVendorDetails") </h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Owner", "CreateVendorDetails") </h4></div>
 
             </div>
         </div>
@@ -300,9 +275,9 @@
                         <thead>
                             <tr>
                                 @*<th>VendorSiteID</th>*@
-                                <th>VendorID</th>
-                                <th>VendorName</th>
-                                <th>VendorAddress</th>
+                                <th>OwnerID</th>
+                                <th>OwnerName</th>
+                                <th>OwnerAddress</th>
                                 <th>ContactPersonName</th>
                                 <th>ContactNumber</th>
                                 <th>Email</th>
@@ -325,8 +300,8 @@
 
         <div class="row">
             <div class="col-md-10  col-lg-10 col-xs-12">
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4>Vendor Branch List</h4></div>
-                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Vendor Branch", "CreateVendorSiteDetails") </h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4>Owner Branch List</h4></div>
+                <div class="col-md-5 col-lg-5 col-xs-6"><h4> @Html.ActionLink("Add New Owner Branch", "CreateVendorBranchDetails") </h4></div>
 
             </div>
         </div>
@@ -338,8 +313,9 @@
                         <thead>
                             <tr>
                                 <th>VendorBranchID</th>
-                                <th>SiteName</th>
-                                <th>SiteAddress</th>
+                                <th>OwnerName</th>
+                                <th>BranchName</th>
+                                <th>BramchAddress</th>
                                 <th>ContactPersonName</th>
                                 <th>ContactNumber</th>
                                 <th>Email</th>

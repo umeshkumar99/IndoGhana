@@ -799,20 +799,6 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_CustomerMasterGetbyID_Result>("usp_CustomerMasterGetbyID", customerIDParameter);
         }
     
-        public virtual ObjectResult<usp_VendorBranchMasterGet_Result> usp_VendorBranchMasterGet()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchMasterGet_Result>("usp_VendorBranchMasterGet");
-        }
-    
-        public virtual ObjectResult<usp_VendorBranchMasterGetbyID_Result> usp_VendorBranchMasterGetbyID(Nullable<int> vendorBranchID)
-        {
-            var vendorBranchIDParameter = vendorBranchID.HasValue ?
-                new ObjectParameter("VendorBranchID", vendorBranchID) :
-                new ObjectParameter("VendorBranchID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchMasterGetbyID_Result>("usp_VendorBranchMasterGetbyID", vendorBranchIDParameter);
-        }
-    
         public virtual ObjectResult<usp_VendorMasterGet_Result> usp_VendorMasterGet()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorMasterGet_Result>("usp_VendorMasterGet");
@@ -932,6 +918,24 @@ namespace CylnderEntities
                 new ObjectParameter("status", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_VendorMasterBranchInsertUpdate", vendorIDParameter, vendorBranchIDParameter, vendorBranchNameParameter, branchAddressParameter, contactPersonNameParameter, contactNumberParameter, emailParameter, createdByParameter, updateByParameter, updatedOnParameter, statusParameter);
+        }
+    
+        public virtual ObjectResult<usp_VendorBranchMasterGetbyID_Result> usp_VendorBranchMasterGetbyID(Nullable<int> vendorBranchID)
+        {
+            var vendorBranchIDParameter = vendorBranchID.HasValue ?
+                new ObjectParameter("VendorBranchID", vendorBranchID) :
+                new ObjectParameter("VendorBranchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchMasterGetbyID_Result>("usp_VendorBranchMasterGetbyID", vendorBranchIDParameter);
+        }
+    
+        public virtual ObjectResult<usp_VendorBranchMasterGet_Result> usp_VendorBranchMasterGet(Nullable<int> vendorID)
+        {
+            var vendorIDParameter = vendorID.HasValue ?
+                new ObjectParameter("VendorID", vendorID) :
+                new ObjectParameter("VendorID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_VendorBranchMasterGet_Result>("usp_VendorBranchMasterGet", vendorIDParameter);
         }
     }
 }
