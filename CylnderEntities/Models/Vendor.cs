@@ -5,6 +5,11 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 namespace CylnderEntities
 {
+    [MetadataType(typeof(Vendor))]
+    public partial class usp_VendorMasterGetbyID_Result
+    {
+
+    }
     [MetadataType(typeof(VendorBranch))]
     public partial class usp_VendorBranchMasterGetbyID_Result
     {
@@ -49,7 +54,8 @@ namespace CylnderEntities
         public int VendorBranchID { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter the branch Name")]
         public string VendorBranchName { get; set; }
-        [Display(Name ="Owner Branch")]
+
+        [Display(Name ="Owner Branch Address")]
         [MaxLength(500, ErrorMessage = "Branch address cannot be greater than 500 characters")]
         public string VendorBranchAddress { get; set; }
 

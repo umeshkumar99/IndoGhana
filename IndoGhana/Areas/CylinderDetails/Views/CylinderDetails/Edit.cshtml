@@ -86,6 +86,7 @@
                         @Html.LabelFor(model => model.CylindeNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
                         @Html.DisplayFor(model => model.CylindeNumber)
+                            @Html.HiddenFor(model => model.CylindeNumber)
                                 @*@Html.EditorFor(model => model.CylindeNumber, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.ValidationMessageFor(model => model.CylindeNumber, "", new { @class = "text-danger" })
                         </div>
@@ -95,6 +96,7 @@
                         @Html.LabelFor(model => model.Barcode, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4 col-lg-4  col-xs-12">
                         @Html.DisplayFor(model => model.Barcode)
+                            @Html.HiddenFor(model => model.Barcode)
                                 @*@Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.ValidationMessageFor(model => model.Barcode, "", new { @class = "text-danger" })
                         </div>
@@ -257,6 +259,8 @@
                             <div class="col-md-4 col-lg-4  col-xs-12" style="padding:0px;">
                                @Html.DisplayFor(model => model.ActualSize)
                                 @Html.DisplayFor(model => model.SizeUOM)
+                                @Html.HiddenFor(model => model.ActualSize)
+                                @Html.HiddenFor(model => model.SizeUOM)
                                  @*@Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })*@
                             </div>
@@ -271,6 +275,7 @@
                         <div class="col-md-4 col-lg-4  col-xs-12">
                             @*@Html.LabelFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.DisplayFor(model => model.CustomerName)
+                            @Html.HiddenFor(model => model.CustomerName)
 
 
                             @*@Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -320,7 +325,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-4 col-lg-4  col-xs-12">
-                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <input type="submit" value="Save" class="btn btn-primary" id="btnsave" name="btnsave" onclick="return confirm('Are you sure to save changes');"  />
                         </div>
                     </div>
                 </div>

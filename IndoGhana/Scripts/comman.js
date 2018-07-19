@@ -1,4 +1,15 @@
-﻿function searchabledropdown() {
+﻿function confirmdata()
+{
+var flag;
+
+    flag=confirm("Are you sure to save changes");
+    if(flag==true)
+        return true;
+    else
+        return false;
+}
+
+function searchabledropdown() {
     $("select").searchable({
         maxListSize: 200, // if list size are less than maxListSize, show them all
         maxMultiMatch: 300, // how many matching entries should be displayed

@@ -133,7 +133,7 @@ namespace IndoGhana.Areas.Masters.Controllers
                 {
 
                     ModelState.AddModelError("Error", "Customer site already exists");
-
+                    FillViewBag();
                     return View();
                 }
 
