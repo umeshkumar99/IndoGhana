@@ -138,6 +138,13 @@ namespace IndoGhana.Areas.Login.Controllers
         }
         public ActionResult Logout()
         {
+            USP_GetUserDetails_Result logindetails;
+            //if (Session["logindetails"] != null)
+            //{
+            logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+            // }
+
+            InventoryEntities.usp_UpdateLogoutTime(logindetails.logid);
             Session.Abandon();
             return RedirectToAction("Index");
         }

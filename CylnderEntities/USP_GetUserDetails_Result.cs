@@ -31,5 +31,6 @@ namespace CylnderEntities
         public Nullable<int> VehicleID { get; set; }
         public string VehicleNumber { get; set; }
         public string ForDate { get; set; }
+        public Nullable<long> logid { get; set; }
     }
 }

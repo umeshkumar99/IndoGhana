@@ -127,6 +127,7 @@
     <Compile Include="Models\Cylinders.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Owner.cs" />
+    <Compile Include="Models\TransactionAllDetail.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
