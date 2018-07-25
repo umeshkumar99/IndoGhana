@@ -221,6 +221,7 @@
         </Function>
         <Function Name="usp_UpdateLogoutTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LogId" Type="bigint" Mode="In" />
+          <Parameter Name="machineIP" Type="varchar" Mode="In" />
         </Function>
         <Function Name="usp_VehicleMasterAddUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VehicleID" Type="int" Mode="In" />
@@ -537,10 +538,7 @@
             <Parameter Name="Password" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="usp_UpdateLogoutTime">
-          <Parameter Name="LogId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_tblTransactionAllDetailInsert">
+          <FunctionImport Name="usp_tblTransactionAllDetailInsert" ReturnType="Collection(Int32)">
             <Parameter Name="TransactionNumber" Mode="In" Type="String" />
             <Parameter Name="TransactionMode" Mode="In" Type="Int32" />
             <Parameter Name="SourceCylinderID" Mode="In" Type="Int32" />
@@ -568,6 +566,10 @@
             <Parameter Name="BranchID" Mode="In" Type="Int32" />
             <Parameter Name="UserID" Mode="In" Type="Int32" />
             <Parameter Name="GasInUse" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateLogoutTime">
+            <Parameter Name="LogId" Mode="In" Type="Int64" />
+            <Parameter Name="machineIP" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_tblStatusMasterGetByType_Result">
@@ -1700,8 +1702,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_UpdateLogoutTime" FunctionName="IndoGhanaModel.Store.usp_UpdateLogoutTime" />
           <FunctionImportMapping FunctionImportName="usp_tblTransactionAllDetailInsert" FunctionName="IndoGhanaModel.Store.usp_tblTransactionAllDetailInsert" />
+          <FunctionImportMapping FunctionImportName="usp_UpdateLogoutTime" FunctionName="IndoGhanaModel.Store.usp_UpdateLogoutTime" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

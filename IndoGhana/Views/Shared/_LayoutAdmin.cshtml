@@ -12,11 +12,25 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Inventory.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
+    <script>
+
+        //$(window).unload(function () {
+        //    alert('hello');
+        //});
+        //function DetectBrowserExit() {
+        //    alert('focus loosed');
+        //}
+        //function DetectlLooseFocus() {
+        //    alert('Execute task which do you want before exit');
+        //}
+        //window.onblur = function () { DetectlLooseFocus();}
+        //window.onbeforeunload = function () { DetectBrowserExit(); }
+    </script>
     <title>@ViewBag.Title</title>
 </head>
 
 
-<body>
+<body  onoffline="alert('You are now offline. Please check your internet connection');">
     <div id="custom-bootstrap-menu" class="navbar navbar-default navbar-right navbar-fixed-top " role="navigation">
         <div class="container">
             <div class="navbar-header">

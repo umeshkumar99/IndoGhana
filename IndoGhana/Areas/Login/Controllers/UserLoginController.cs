@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CylnderEntities;
+using System.Net;
 
 namespace IndoGhana.Areas.Login.Controllers
 {
@@ -11,6 +12,7 @@ namespace IndoGhana.Areas.Login.Controllers
     {
         // GET: Login/UserLogin
         IndoGhanaEntities InventoryEntities = new IndoGhanaEntities();
+        string IPAddress;
         public ActionResult Index()
         {
 
@@ -110,24 +112,15 @@ namespace IndoGhana.Areas.Login.Controllers
                 string result = (string)InventoryEntities.usp_tblUserMasterInsertUpdate(0, userdetails.User_Name, userdetails.Address, userdetails.Email,
                               userdetails.Contact_Number, userdetails.IMIE1, userdetails.IMIE2, userdetails.Login_Id, userdetails.Password, userdetails.Group_Id, logindetails.Company_Id,
                               DateTime.Now, userdetails.UserStatus, logindetails.USer_Id, userdetails.Branch_Id, 0).FirstOrDefault();
+              
                 if (result == "Duplicate user")
                 {
                     FillViewBag();
                     ModelState.AddModelError("Error", "User already exists");
-                    //ViewBag.error = "User already exists";
-                    // return Content("Duplicate User");
-                    // return RedirectToAction("CreateUserDetails"); 
+                  
                     return View();
                 }
-                else if(result == "Duplicate mobile")
-                {
-                    FillViewBag();
-                    ModelState.AddModelError("Error", "Mobile No. already exists");
-                    //ViewBag.error = "User already exists";
-                    
-                    return View();
-
-                }
+               
                     else
                                     return RedirectToAction("ListUsers");
             }
@@ -139,19 +132,47 @@ namespace IndoGhana.Areas.Login.Controllers
         public ActionResult Logout()
         {
             USP_GetUserDetails_Result logindetails;
-            //if (Session["logindetails"] != null)
-            //{
-            logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
-            // }
+            try
+            {
 
-            InventoryEntities.usp_UpdateLogoutTime(logindetails.logid);
-            Session.Abandon();
-            return RedirectToAction("Index");
+
+                IPAddress = GetIPAddress();
+                //if (Session["logindetails"] != null)
+                //{
+                logindetails = (USP_GetUserDetails_Result)Session["logindetails"];
+                // }
+
+                InventoryEntities.usp_UpdateLogoutTime(logindetails.logid, IPAddress);
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
         }
         private void FillViewBag()
         {
             ViewBag.Group_Id = new SelectList(InventoryEntities.usp_tblGroupGet(), "Group_Id", "Group_Name");
             ViewBag.Branch_Id = new SelectList(InventoryEntities.usp_tblCompanyBranchMasterListGet(), "BranchId", "BranchName");
             }
+     
+
+        public string GetIPAddress()
+        {
+            IPHostEntry Host = default(IPHostEntry);
+            string Hostname = null;
+            Hostname = System.Environment.MachineName;
+            Host = Dns.GetHostEntry(Hostname);
+            foreach (IPAddress IP in Host.AddressList)
+            {
+                if (IP.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    IPAddress = Convert.ToString(IP);
+                }
+            }
+            return IPAddress;
         }
+
+    }
     }

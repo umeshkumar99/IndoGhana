@@ -938,16 +938,7 @@ namespace CylnderEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_GetUserDetails_Result>("USP_GetUserDetails", loginIdParameter, passwordParameter, phoneParameter);
         }
     
-        public virtual int usp_UpdateLogoutTime(Nullable<long> logId)
-        {
-            var logIdParameter = logId.HasValue ?
-                new ObjectParameter("LogId", logId) :
-                new ObjectParameter("LogId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateLogoutTime", logIdParameter);
-        }
-    
-        public virtual int usp_tblTransactionAllDetailInsert(string transactionNumber, Nullable<int> transactionMode, Nullable<int> sourceCylinderID, Nullable<byte> flgSourceBarCodeExists, string sourceBarCodeNumber, string sourceCylinderNumber, Nullable<int> sourceCylinderSize, Nullable<int> targetCylinderID, Nullable<byte> flgTargetBarCodeExists, string targetBarCodeNumber, string targetCylinderNumber, Nullable<int> targetCylinderSize, Nullable<byte> sstat, Nullable<int> customerID, Nullable<int> currentCustomerBranchID, string customerName, string vendorName, string sizeUOM, string presentState, Nullable<int> presentStateID, Nullable<int> locationID, string vanBatchNumber, string transactionDateTime, Nullable<int> companyID, Nullable<int> branchID, Nullable<int> userID, string gasInUse)
+        public virtual ObjectResult<Nullable<int>> usp_tblTransactionAllDetailInsert(string transactionNumber, Nullable<int> transactionMode, Nullable<int> sourceCylinderID, Nullable<byte> flgSourceBarCodeExists, string sourceBarCodeNumber, string sourceCylinderNumber, Nullable<int> sourceCylinderSize, Nullable<int> targetCylinderID, Nullable<byte> flgTargetBarCodeExists, string targetBarCodeNumber, string targetCylinderNumber, Nullable<int> targetCylinderSize, Nullable<byte> sstat, Nullable<int> customerID, Nullable<int> currentCustomerBranchID, string customerName, string vendorName, string sizeUOM, string presentState, Nullable<int> presentStateID, Nullable<int> locationID, string vanBatchNumber, string transactionDateTime, Nullable<int> companyID, Nullable<int> branchID, Nullable<int> userID, string gasInUse)
         {
             var transactionNumberParameter = transactionNumber != null ?
                 new ObjectParameter("TransactionNumber", transactionNumber) :
@@ -1057,7 +1048,20 @@ namespace CylnderEntities
                 new ObjectParameter("GasInUse", gasInUse) :
                 new ObjectParameter("GasInUse", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_tblTransactionAllDetailInsert", transactionNumberParameter, transactionModeParameter, sourceCylinderIDParameter, flgSourceBarCodeExistsParameter, sourceBarCodeNumberParameter, sourceCylinderNumberParameter, sourceCylinderSizeParameter, targetCylinderIDParameter, flgTargetBarCodeExistsParameter, targetBarCodeNumberParameter, targetCylinderNumberParameter, targetCylinderSizeParameter, sstatParameter, customerIDParameter, currentCustomerBranchIDParameter, customerNameParameter, vendorNameParameter, sizeUOMParameter, presentStateParameter, presentStateIDParameter, locationIDParameter, vanBatchNumberParameter, transactionDateTimeParameter, companyIDParameter, branchIDParameter, userIDParameter, gasInUseParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_tblTransactionAllDetailInsert", transactionNumberParameter, transactionModeParameter, sourceCylinderIDParameter, flgSourceBarCodeExistsParameter, sourceBarCodeNumberParameter, sourceCylinderNumberParameter, sourceCylinderSizeParameter, targetCylinderIDParameter, flgTargetBarCodeExistsParameter, targetBarCodeNumberParameter, targetCylinderNumberParameter, targetCylinderSizeParameter, sstatParameter, customerIDParameter, currentCustomerBranchIDParameter, customerNameParameter, vendorNameParameter, sizeUOMParameter, presentStateParameter, presentStateIDParameter, locationIDParameter, vanBatchNumberParameter, transactionDateTimeParameter, companyIDParameter, branchIDParameter, userIDParameter, gasInUseParameter);
+        }
+    
+        public virtual int usp_UpdateLogoutTime(Nullable<long> logId, string machineIP)
+        {
+            var logIdParameter = logId.HasValue ?
+                new ObjectParameter("LogId", logId) :
+                new ObjectParameter("LogId", typeof(long));
+    
+            var machineIPParameter = machineIP != null ?
+                new ObjectParameter("machineIP", machineIP) :
+                new ObjectParameter("machineIP", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateLogoutTime", logIdParameter, machineIPParameter);
         }
     }
 }

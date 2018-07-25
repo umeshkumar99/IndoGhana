@@ -71,7 +71,7 @@ namespace CylinderAPI.Controllers
                 int result = 0;
                 foreach (TransactionAllDetail trans in transactionAllDetail)
                 {
-                result=    InventoryEntities.usp_tblTransactionAllDetailInsert(trans.TransactionNumber, trans.TransactionMode, trans.SourceCylinderID, Convert.ToByte(trans.flgSourceBarCodeExists), trans.SourceBarCodeNumber, trans.SourceCylinderNumber, trans.SourceCylinderID, trans.TargetCylinderID, Convert.ToByte(trans.flgTargetBarCodeExists), trans.TargetBarCodeNumber, trans.TargetCylinderNumber, trans.TargetCylinderSize, Convert.ToByte(trans.Sstat), trans.CustomerID, trans.CurrentCustomerBranchID, trans.CustomerName, trans.VendorName, trans.SizeUOM, trans.PresentState, trans.PresentStateID, trans.LocationID, trans.VanBatchNumber, trans.TransactionDateTime, trans.CompanyID, trans.BranchID, trans.UserID, trans.GasInUse);
+                    result = (int)InventoryEntities.usp_tblTransactionAllDetailInsert(trans.TransactionNumber, trans.TransactionMode, trans.SourceCylinderID, Convert.ToByte(trans.flgSourceBarCodeExists), trans.SourceBarCodeNumber, trans.SourceCylinderNumber, trans.SourceCylinderID, trans.TargetCylinderID, Convert.ToByte(trans.flgTargetBarCodeExists), trans.TargetBarCodeNumber, trans.TargetCylinderNumber, trans.TargetCylinderSize, Convert.ToByte(trans.Sstat), trans.CustomerID, trans.CurrentCustomerBranchID, trans.CustomerName, trans.VendorName, trans.SizeUOM, trans.PresentState, trans.PresentStateID, trans.LocationID, trans.VanBatchNumber, trans.TransactionDateTime, trans.CompanyID, trans.BranchID, trans.UserID, trans.GasInUse).FirstOrDefault();
 
 
                 }
